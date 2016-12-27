@@ -24,7 +24,7 @@
 <div class="super-group-menu-wrap">
 	<div class="super-group-menu">
 		<!-- ###  Start Menu Include  ### -->
-			<group:include type="menu" />
+		<group:include type="menu" />
 		<!-- ###  End Menu Include  ### -->
 	</div>
 </div>
