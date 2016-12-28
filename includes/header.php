@@ -11,13 +11,15 @@
 ?>
 
 <div class="super-group-header-wrap">
-	<div class="super-group-header cf">
-		<h1>
-			<a href="<?php echo Route::url('index.php?option=com_groups&cn=' . $this->group->get('cn')); ?>" title="<?php echo $this->group->get('description'); ?> Home">
-				<?php echo $this->group->get('description'); ?>
-				<!-- <span>[<?php echo $this->group->get('cn'); ?>]</span> -->
-			</a>
-		</h1>
+	<div class="bg-overlay">
+		<div class="super-group-header cf">
+			<h1>
+				<a href="<?php echo Route::url('index.php?option=com_groups&cn=' . $this->group->get('cn')); ?>" title="<?php echo $this->group->get('description'); ?> Home">
+					<?php echo $this->group->get('description'); ?>
+					<!-- <span>[<?php echo $this->group->get('cn'); ?>]</span> -->
+				</a>
+			</h1>
+		</div>
 	</div>
 </div>
 
