@@ -65,4 +65,17 @@ jQuery(document).ready(function(jq) {
 	/*
 		Enter custom JS code here.
 	*/
+	
+	/* Sticky navbar */
+	/* https://teamtreehouse.com/community/forum-tip-create-a-sticky-navigation-with-css-and-jquery-2 */
+	
+	var sgmw = $(".super-group-menu-wrap");
+	
+	$(window).scroll(function() {
+		if ($(this).scrollTop() > 150) {
+			sgmw.addClass("super-group-menu-scrolled");
+		} else {
+			sgmw.removeClass("super-group-menu-scrolled");
+		}
+	});
 });

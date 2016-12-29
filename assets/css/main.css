@@ -212,10 +212,9 @@
 /* Content */
 .super-group-content-wrap {
 	margin: 0;
-	padding: 0;
 	font-size: 1.2em;
 	min-height: 300px;
-	padding: 0 20px 40px 20px !important;
+	padding: 50px 20px 40px 20px !important;	/* Sticky navbar: Top = 50px */
 }
 .super-group-content {
 	margin: 0;
@@ -297,6 +296,39 @@
 /* Login */
 .group_login > h2:first-child {
 	display: none;
+}
+
+/* Sticky navbar */
+/* https://teamtreehouse.com/community/forum-tip-create-a-sticky-navigation-with-css-and-jquery-2 */
+
+#group-body {
+	padding-top: 194px;
+}
+.super-group-bar {
+	top: 0;
+}
+.super-group-header-wrap {
+	top: 44px;
+	z-index: -100;
+}
+.super-group-header-wrap,
+.super-group-bar {
+	position: fixed;
+	width: 100%;
+}
+.super-group-menu-wrap,
+.super-group-body-wrap {
+	position: relative;
+}
+.super-group-menu-wrap {
+	z-index: 150;
+	box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+	margin-bottom: -44px;
+}
+.super-group-menu-scrolled {
+	position: fixed;	/* Same as .super-group-header-wrap */
+	top: 44px;			/* Same as .super-group-header-wrap */
+	width: 100%;		/* Same as .super-group-header-wrap */
 }
 
 /* Responsive */
