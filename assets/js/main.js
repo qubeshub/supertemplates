@@ -68,8 +68,14 @@ jQuery(document).ready(function(jq) {
 	
 	/* Sticky navbar */
 	/* https://teamtreehouse.com/community/forum-tip-create-a-sticky-navigation-with-css-and-jquery-2 */
+	//
+	// Bug in login - had to comment out the following line 
+	//		$('#username, #password').placeholder();
+	// in the file /www/dev/core/components/com_users/site/assets/js/login.js
+	// to get it to work.
 	
 	var sgmw = $(".super-group-menu-wrap");
+	var body = $(document.getElementsByTagName("body")[0]);
 	
 	$(window).scroll(function() {
 		if ($(this).scrollTop() > 150) {
@@ -78,4 +84,5 @@ jQuery(document).ready(function(jq) {
 			sgmw.removeClass("super-group-menu-scrolled");
 		}
 	});
+	
 });

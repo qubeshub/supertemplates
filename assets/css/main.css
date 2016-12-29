@@ -304,13 +304,16 @@
 #group-body {
 	padding-top: 194px;
 }
+/* Bar needs to be at top */
 .super-group-bar {
 	top: 0;
 }
+/* Offset by height of bar, and make sure in the back */
 .super-group-header-wrap {
 	top: 44px;
 	z-index: -100;
 }
+/* Fixed at top */
 .super-group-header-wrap,
 .super-group-bar {
 	position: fixed;
@@ -329,6 +332,13 @@
 	position: fixed;	/* Same as .super-group-header-wrap */
 	top: 44px;			/* Same as .super-group-header-wrap */
 	width: 100%;		/* Same as .super-group-header-wrap */
+}
+/* Need to take care of group-info */
+#group-info {
+	top: 44px;
+	position: fixed;
+	width: 100%;
+	z-index: 200;
 }
 
 /* Responsive */
