@@ -75,7 +75,6 @@ jQuery(document).ready(function(jq) {
 	// to get it to work.
 	
 	var sgmw = $(".super-group-menu-wrap");
-	var body = $(document.getElementsByTagName("body")[0]);
 	
 	$(window).scroll(function() {
 		if ($(this).scrollTop() > 150) {
