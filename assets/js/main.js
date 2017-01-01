@@ -76,15 +76,27 @@ jQuery(document).ready(function(jq) {
 	
 	var sgmw = $(".super-group-menu-wrap");
 	var sgpb = document.getElementsByClassName("poweredby")[0];
+	var sgid = $(".header-id");
+	console.log(sgpb.style.cursor);
 	
 	$(window).scroll(function() {
 		var st = $(this).scrollTop();
 		if (st > 100) {
-			sgpb.style.opacity = Math.max(1 - (1/25)*(st-100), 0);
+			sgpb.style["opacity"] = Math.max(1 - (1/25)*(st-100), 0);
+			sgpb.style["cursor"] = "default";
+			sgpb.style["pointerEvents"] = "none";
 		} else {
-			sgpb.style.opacity = 1.0;
+			sgpb.style["opacity"] = 1.0;
+			sgpb.style["cursor"] = "inherit";	// Doesn't reset properly on Firefox
+			sgpb.style["pointerEvents"] = "inherit";
 		}
 
+		if (st > 140) {
+			sgid.addClass("header-id-scrolled");
+		} else {
+			sgid.removeClass("header-id-scrolled");
+		}
+		
 		if (st > 150) {
 			sgmw.addClass("super-group-menu-scrolled");
 		} else {

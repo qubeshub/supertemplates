@@ -340,20 +340,22 @@
 	top: 44px;			/* Same as .super-group-header-wrap */
 	width: 100%;		/* Same as .super-group-header-wrap */
 }
-.poweredby-scrolled {
-	/* color: #000 !important; */
-	opacity: 1.0;
+.header-id {
+	transition: transform .2s ease-in-out;
 }
-id-scrolled {
-	position: fixed;
-	top: 0;
+.header-id-scrolled {
+	position: fixed !important;
+	top: -12px !important;
+	transform: scale(0.75) translate(-40px);
+	-ms-transform: scale(0.75) translate(-40px);
+	-webkit-transform: scale(0.75) translate(-40px);
 }
 /* Need to take care of group-info */
 #group-info {
 	top: 44px;
 	position: fixed;
 	width: 100%;
-	z-index: 200;
+	z-index: 1001;
 }
 
 /* Responsive */

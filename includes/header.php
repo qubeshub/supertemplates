@@ -23,7 +23,7 @@ if ($this->group->get('logo') == NULL) {
 
 <div class="super-group-header-overlay-wrap">
 	<div class="super-group-header-overlay">
-		<h1>
+		<h1 class="header-id">
 			<a href="<?php echo Route::url('index.php?option=com_groups&cn=' . $this->group->get('cn')); ?>" title="<?php echo $this->group->get('description'); ?> Home">
 				<?php if ($logo) : ?>
 					<img src="<?php echo $logo ?>" height="36px">
