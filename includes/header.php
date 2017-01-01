@@ -17,18 +17,21 @@ if ($this->group->get('logo') == NULL) {
 ?>
 
 <div class="super-group-header-wrap">
-	<div class="bg-overlay">
-		<div class="super-group-header cf">
-			<h1>
-				<a href="<?php echo Route::url('index.php?option=com_groups&cn=' . $this->group->get('cn')); ?>" title="<?php echo $this->group->get('description'); ?> Home">
-					<?php if ($logo) : ?>
-						<img src="<?php echo $logo ?>" height="36px">
-					<?php endif; ?>
-					<?php echo $this->group->get('description'); ?>
-					<!-- <span>[<?php echo $this->group->get('cn'); ?>]</span> -->
-				</a>
-			</h1>
-		</div>
+	<div class="super-group-header cf">
+	</div>
+</div>
+
+<div class="super-group-header-overlay-wrap">
+	<div class="super-group-header-overlay">
+		<h1>
+			<a href="<?php echo Route::url('index.php?option=com_groups&cn=' . $this->group->get('cn')); ?>" title="<?php echo $this->group->get('description'); ?> Home">
+				<?php if ($logo) : ?>
+					<img src="<?php echo $logo ?>" height="36px">
+				<?php endif; ?>
+				<?php echo $this->group->get('description'); ?>
+				<!-- <span>[<?php echo $this->group->get('cn'); ?>]</span> -->
+			</a>
+		</h1>
 	</div>
 </div>
 

@@ -75,9 +75,17 @@ jQuery(document).ready(function(jq) {
 	// to get it to work.
 	
 	var sgmw = $(".super-group-menu-wrap");
+	var sgpb = document.getElementsByClassName("poweredby")[0];
 	
 	$(window).scroll(function() {
-		if ($(this).scrollTop() > 150) {
+		var st = $(this).scrollTop();
+		if (st > 100) {
+			sgpb.style.opacity = Math.max(1 - (1/25)*(st-100), 0);
+		} else {
+			sgpb.style.opacity = 1.0;
+		}
+
+		if (st > 150) {
 			sgmw.addClass("super-group-menu-scrolled");
 		} else {
 			sgmw.removeClass("super-group-menu-scrolled");

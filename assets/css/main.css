@@ -49,7 +49,13 @@
 	width: 100%;
 	position: relative;
 }
-.bg-overlay {
+.super-group-header-overlay-wrap {
+	/* height: 150px; */
+	position: absolute;
+	width:100%;
+	top: -150px;
+}
+.super-group-header-overlay {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.3+100 */
 	background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -57,14 +63,15 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#4d000000',GradientType=0 ); /* IE6-9 */
 	height: 150px;
 }
-.super-group-header h1 {
+.super-group-header-overlay h1 {
 	position: absolute;
 	top: 80px;
 	left: 20px;
 	margin: 0.5em 0;
 	padding: 0;
+	z-index: 1000;
 }
-.super-group-header h1 a {
+.super-group-header-overlay h1 a {
 	display: block;
 	font-weight: 100;
 	/*font-size: 30px;
@@ -75,10 +82,10 @@
 	font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
 	border: none !important;
 }
-.super-group-header h1 a span {
+.super-group-header-overlay h1 a span {
 	color: #777;
 }
-.super-group-header h1 a:hover {
+.super-group-header-overlay h1 a:hover {
 	border: none !important;
 }
 
@@ -332,6 +339,14 @@
 	position: fixed;	/* Same as .super-group-header-wrap */
 	top: 44px;			/* Same as .super-group-header-wrap */
 	width: 100%;		/* Same as .super-group-header-wrap */
+}
+.poweredby-scrolled {
+	/* color: #000 !important; */
+	opacity: 1.0;
+}
+id-scrolled {
+	position: fixed;
+	top: 0;
 }
 /* Need to take care of group-info */
 #group-info {
