@@ -8,8 +8,12 @@
  * @copyright  December 2015
  */
 
+html {
+	background: #45611F;
+}
+
 #group-body {
-	background: #666;
+	background: #45611F;
 	min-width: inherit;
 }
 /**
@@ -235,7 +239,7 @@
 
 /* Footer */
 .super-group-footer-wrap {
-	background: #666;
+	background: #45611F;
 	padding: 0 20px;
 }
 .super-group-footer {
@@ -243,7 +247,7 @@
 	width: 100%;
 	padding: 20px 0 40px 0;
 	font-size: 11px;
-	color: #999;
+	color: #FFF;
 }
 
 /* Home Page */
