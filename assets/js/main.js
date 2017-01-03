@@ -77,7 +77,6 @@ jQuery(document).ready(function(jq) {
 	var sgmw = $(".super-group-menu-wrap");
 	var sgpb = document.getElementsByClassName("poweredby")[0];
 	var sgid = $(".header-id");
-	console.log(sgpb.style.cursor);
 	
 	$(window).scroll(function() {
 		var st = $(this).scrollTop();
@@ -91,7 +90,7 @@ jQuery(document).ready(function(jq) {
 			sgpb.style["pointerEvents"] = "inherit";
 		}
 
-		if (st > 140) {
+		if (st > 130) {
 			sgid.addClass("header-id-scrolled");
 		} else {
 			sgid.removeClass("header-id-scrolled");

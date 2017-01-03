@@ -26,9 +26,9 @@ if ($this->group->get('logo') == NULL) {
 		<h1 class="header-id">
 			<a href="<?php echo Route::url('index.php?option=com_groups&cn=' . $this->group->get('cn')); ?>" title="<?php echo $this->group->get('description'); ?> Home">
 				<?php if ($logo) : ?>
-					<img src="<?php echo $logo ?>" height="36px">
+					<img src="<?php echo $logo ?>" class="header-id-logo">
 				<?php endif; ?>
-				<?php echo $this->group->get('description'); ?>
+				<span><?php echo $this->group->get('description'); ?></span>
 				<!-- <span>[<?php echo $this->group->get('cn'); ?>]</span> -->
 			</a>
 		</h1>

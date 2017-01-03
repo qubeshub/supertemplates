@@ -73,17 +73,18 @@
 }
 .super-group-header-overlay h1 a {
 	display: block;
-	font-weight: 100;
-	/*font-size: 30px;
-	line-height: 36px;*/
-	font-size: 1.2em;
-	line-height: 1.2em;
+	/* font-weight: 100;
+	font-size: 30px;
+	line-height: 36px; */
+	font-size: 1.1em;
+	line-height: 1.1em;
 	color: #FFF;
-	font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+	font-family: 'Martel', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
 	border: none !important;
 }
 .super-group-header-overlay h1 a span {
-	color: #777;
+	position: relative;
+	left: 4px;
 }
 .super-group-header-overlay h1 a:hover {
 	border: none !important;
@@ -304,6 +305,13 @@
 .group_login > h2:first-child {
 	display: none;
 }
+/* System messages */
+#system-message-container {
+	position: absolute;
+    top: 44px;
+    z-index: 1;
+    width: 100%;
+}
 
 /* Sticky navbar */
 /* https://teamtreehouse.com/community/forum-tip-create-a-sticky-navigation-with-css-and-jquery-2 */
@@ -345,10 +353,15 @@
 }
 .header-id-scrolled {
 	position: fixed !important;
-	top: -12px !important;
+	top: -9px !important;
 	transform: scale(0.75) translate(-40px);
 	-ms-transform: scale(0.75) translate(-40px);
 	-webkit-transform: scale(0.75) translate(-40px);
+}
+.header-id-logo {
+	position: relative;
+	height: 36px;
+	bottom: 2px;
 }
 /* Need to take care of group-info */
 #group-info {
