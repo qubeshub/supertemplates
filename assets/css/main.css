@@ -249,6 +249,9 @@ html {
 	font-size: 11px;
 	color: #FFF;
 }
+.super-group-footer a {
+	color: #8bc240;
+}
 
 /* Home Page */
 .group_overview {
