@@ -40,38 +40,57 @@ html {
 
 /* Header */
 .super-group-header-wrap {
-	background: #444;
-	border-top: 1px solid #555;
-	/*height: 75px;*/
-	padding: 0 20px;
+	margin-top: 0px;
+	height: 150px;
+	background-image: url(/groups/testsg/File:/uploads/v2_outdoor_class.jpg);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center center;
+	background-size: cover;
 }
 .super-group-header {
 	margin: 0;
 	width: 100%;
 	position: relative;
 }
-.super-group-header h1 {
-	/*position: absolute;
-	top: 18px;
-	left: 0;*/
+.super-group-header-overlay-wrap {
+	/* height: 150px; */
+	position: absolute;
+	width:100%;
+	top: -150px;
+}
+.super-group-header-overlay {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.3+100 */
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#4d000000',GradientType=0 ); /* IE6-9 */
+	height: 150px;
+}
+.super-group-header-overlay h1 {
+	position: absolute;
+	top: 80px;
+	left: 20px;
 	margin: 0.5em 0;
 	padding: 0;
+	z-index: 1000;
 }
-.super-group-header h1 a {
+.super-group-header-overlay h1 a {
 	display: block;
-	font-weight: 100;
-	/*font-size: 30px;
-	line-height: 36px;*/
-	font-size: 1.2em;
-	line-height: 1.2em;
+	/* font-weight: 100;
+	font-size: 30px;
+	line-height: 36px; */
+	font-size: 1.1em;
+	line-height: 1.1em;
 	color: #FFF;
-	font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+	font-family: 'Martel', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
 	border: none !important;
 }
-.super-group-header h1 a span {
-	color: #777;
+.super-group-header-overlay h1 a span {
+	position: relative;
+	left: 4px;
 }
-.super-group-header h1 a:hover {
+.super-group-header-overlay h1 a:hover {
 	border: none !important;
 }
 
@@ -205,10 +224,9 @@ html {
 /* Content */
 .super-group-content-wrap {
 	margin: 0;
-	padding: 0;
 	font-size: 1.2em;
 	min-height: 300px;
-	padding: 0 20px 40px 20px !important;
+	padding: 50px 20px 40px 20px !important;	/* Sticky navbar: Top = 50px */
 }
 .super-group-content {
 	margin: 0;
@@ -293,6 +311,71 @@ html {
 /* Login */
 .group_login > h2:first-child {
 	display: none;
+}
+/* System messages */
+#system-message-container {
+	position: absolute;
+    top: 44px;
+    z-index: 1;
+    width: 100%;
+}
+
+/* Sticky navbar */
+/* https://teamtreehouse.com/community/forum-tip-create-a-sticky-navigation-with-css-and-jquery-2 */
+
+#group-body {
+	padding-top: 194px;
+}
+/* Bar needs to be at top */
+.super-group-bar {
+	top: 0;
+}
+/* Offset by height of bar, and make sure in the back */
+.super-group-header-wrap {
+	top: 44px;
+	z-index: -100;
+}
+/* Fixed at top */
+.super-group-header-wrap,
+.super-group-bar {
+	position: fixed;
+	width: 100%;
+}
+.super-group-menu-wrap,
+.super-group-body-wrap {
+	position: relative;
+}
+.super-group-menu-wrap {
+	z-index: 150;
+	box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+	margin-bottom: -44px;
+}
+.super-group-menu-scrolled {
+	position: fixed;	/* Same as .super-group-header-wrap */
+	top: 44px;			/* Same as .super-group-header-wrap */
+	width: 100%;		/* Same as .super-group-header-wrap */
+}
+.header-id {
+	transition: transform .2s ease-in-out;
+}
+.header-id-scrolled {
+	position: fixed !important;
+	top: -9px !important;
+	transform: scale(0.75) translate(-40px);
+	-ms-transform: scale(0.75) translate(-40px);
+	-webkit-transform: scale(0.75) translate(-40px);
+}
+.header-id-logo {
+	position: relative;
+	height: 36px;
+	bottom: 2px;
+}
+/* Need to take care of group-info */
+#group-info {
+	top: 44px;
+	position: fixed;
+	width: 100%;
+	z-index: 1001;
 }
 
 /* Responsive */
