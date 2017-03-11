@@ -12,7 +12,7 @@
 	background: #45611F;
 	min-width: inherit;
 }
-/**
+/** 
  * BEGIN header buttons
  * The next two are for the Getting Started buttons in upper left 
  **/
@@ -38,7 +38,7 @@
 .super-group-header-wrap {
 	margin-top: 0px;
 	height: 150px;
-	background-image: url(/groups/testsg/File:/uploads/v2_outdoor_class.jpg);
+	background-image: url(/groups/testsgp/File:/uploads/v2_outdoor_class.jpg);
 	background-repeat: no-repeat;
 	background-attachment: scroll;
 	background-position: center center;
@@ -249,6 +249,10 @@
 .super-group-content .section {
 	padding: 0 !important;
 	margin: 20px 0 !important;
+}
+
+a:hover {
+	border: none;
 }
 
 /* Footer */
