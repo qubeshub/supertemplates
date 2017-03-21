@@ -39,6 +39,12 @@ defined('_HZEXEC_') or die();
 class View
 {
 	/**
+	 * Get number of visible pages
+	 *
+	 *
+	 */
+	 	 
+	/**
 	 * Output menu
 	 * 
 	 * @param  [type] $pageArray [description]
@@ -51,6 +57,7 @@ class View
 
 		$out = '';
 
+		// Only create sub-menu if at least one page visible to user
 		if (sizeof($pageArray) > 0)
 		{
 			$out = '<ul class="cf">';
@@ -73,7 +80,7 @@ class View
 				if (($pageAccess == 'registered' && User::isGuest()) ||
 				  ($pageAccess == 'members' && !in_array(User::get("id"), $group->get('members'))))
 				{
-					$out .= "<li class=\"protected\"><span class=\"page\">" . $page->get('title') . "</span></li>";
+					/* $out .= "<li class=\"protected\"><span class=\"page\">" . $page->get('title') . "</span></li>"; */
 				}
 				else
 				{
