@@ -38,7 +38,7 @@
 .super-group-header-wrap {
 	margin-top: 0px;
 	height: 150px;
-	background-image: url(/groups/testsg/File:/uploads/v2_outdoor_class.jpg);
+	background-image: url(/groups/testsgp/File:/uploads/v2_outdoor_class.jpg);
 	background-repeat: no-repeat;
 	background-attachment: scroll;
 	background-position: center center;
@@ -352,14 +352,30 @@
 	width: 100%;		/* Same as .super-group-header-wrap */
 }
 .header-id {
-	transition: transform .2s ease-in-out;
+	-webkit-transition: transform .2s ease-in-out;
+    -moz-transition: transform .2s ease-in-out;
+    -ms-transition: transform .2s ease-in-out;
+    -o-transition: transform .2s ease-in-out;
+    transition: transform .2s ease-in-out;
+    -webkit-transform-origin: 0 50%;
+    -moz-transform-origin: 0 50%;
+    -ms-transform-origin: 0 50%;
+    -o-transform-origin: 0 50%;
+	transform-origin: 0 50%;
 }
 .header-id-scrolled {
 	position: fixed !important;
 	top: -9px !important;
-	transform: scale(0.75) translate(-40px);
-	-ms-transform: scale(0.75) translate(-40px);
-	-webkit-transform: scale(0.75) translate(-40px);
+	-webkit-transform: scale(0.75);
+    -moz-transform: scale(0.75);
+    -ms-transform: scale(0.75);
+    -o-transform: scale(0.75);
+    transform: scale(0.75);
+    -webkit-transform-origin: 0 50%;
+    -moz-transform-origin: 0 50%;
+    -ms-transform-origin: 0 50%;
+    -o-transform-origin: 0 50%;
+	transform-origin: 0 50%;
 }
 .header-id-logo {
 	position: relative;
@@ -372,6 +388,16 @@
 	position: fixed;
 	width: 100%;
 	z-index: 1001;
+}
+
+/* Anchors need to adjust position to accomodate header */
+/* Source:  http://stackoverflow.com/questions/4086107/html-positionfixed-page-header-and-in-page-anchors */
+/* Note:  Should use javascript, as header can change size depending on zoom level */
+:target:before {
+  content:"";
+  display:block;
+  height: 90px; /* fixed header height*/
+  margin: -90px 0 0; /* negative fixed header height */
 }
 
 /* Responsive */
