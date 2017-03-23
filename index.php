@@ -24,7 +24,7 @@ Document::addStyleSheet($base . DS . 'assets/css/main.css');
 Document::addScript($base . DS . 'assets/js/main.js');
 ?>
 
-<!-- modify css for banner image -->
+<!-- begin: modify css for banner image -->
 <?php $uploads = rtrim(str_replace(PATH_ROOT, '', __DIR__), 'template') . 'uploads'; ?>
 <style>
 .super-group-header-wrap {
@@ -39,6 +39,7 @@ Document::addScript($base . DS . 'assets/js/main.js');
 	?>
 }
 </style>
+<!-- end: modify css for banner image -->
 
 <?php if (!$no_html) : ?>
 <group:include type="content" scope="before" />
@@ -50,7 +51,7 @@ Document::addScript($base . DS . 'assets/js/main.js');
 		<div class="super-group-content-wrap">
 			<div class="super-group-content group_<?php echo $this->tab; ?>">
 				<?php
-					$title = (isset($this->page) && $this->page->get('title')) ? $this->page->get('title') : Lang::txt('PLG_GROUPS_' . strtoupper($this->tab));
+					$title = (isset($this->page) && $this->page->get('title')) ? '' : Lang::txt('PLG_GROUPS_' . strtoupper($this->tab));
 					$title = ($title == 'PLG_GROUPS_' . strtoupper($this->tab) ? ucfirst($this->tab) : $title);
 					if ($title != '') :
 				?>
