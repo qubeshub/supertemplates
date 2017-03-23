@@ -24,6 +24,22 @@ Document::addStyleSheet($base . DS . 'assets/css/main.css');
 Document::addScript($base . DS . 'assets/js/main.js');
 ?>
 
+<!-- modify css for banner image -->
+<?php $uploads = rtrim(str_replace(PATH_ROOT, '', __DIR__), 'template') . 'uploads'; ?>
+<style>
+.super-group-header-wrap {
+	<?php 
+	if (file_exists(PATH_ROOT . $uploads . DS . "banner.jpg")):
+		echo "background-image: url(" . $uploads . DS . "banner.jpg);";
+	elseif (file_exists(PATH_ROOT . $uploads . DS . "banner.png")):
+		echo "background-image: url(" . $uploads . DS . "banner.png);";
+	else:
+		echo "background-image: none;";
+	endif;
+	?>
+}
+</style>
+
 <?php if (!$no_html) : ?>
 <group:include type="content" scope="before" />
 

@@ -38,7 +38,7 @@
 .super-group-header-wrap {
 	margin-top: 0px;
 	height: 150px;
-	background-image: url(/groups/testsgp/File:/uploads/v2_outdoor_class.jpg);
+	background-image: none;	/* Changed within index.php to point to banner.jpg or banner.png */
 	background-repeat: no-repeat;
 	background-attachment: scroll;
 	background-position: center center;
