@@ -22,6 +22,8 @@ $no_html = Request::getInt('no_html', 0);
 Document::addStyleSheet("https://fonts.googleapis.com/css?family=Martel:200");
 Document::addStyleSheet($base . DS . 'assets/css/main.css');
 Document::addScript($base . DS . 'assets/js/main.js');
+Document::addScript($base . DS . 'assets/js/ResizeSensor.js');
+Document::addScript($base . DS . 'assets/js/ElementQueries.js');
 ?>
 
 <!-- begin: modify css for banner image -->

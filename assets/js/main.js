@@ -66,6 +66,32 @@ jQuery(document).ready(function(jq) {
 		Enter custom JS code here.
 	*/
 	
+	/* Fix content for sticky group announcements. */
+	var $scontainer = $(".scontainer");
+	var $superGroupMenuWrap = $(".super-group-menu-wrap");
+	var $superGroupContentWrap = $(".super-group-content-wrap");
+
+	$scontainer.css("margin-top", $superGroupMenuWrap.css("height"));
+	$superGroupContentWrap.css("margin-top", $scontainer.css("height"));
+	new ResizeSensor(jQuery('.super-group-menu-wrap'), function() {
+		$scontainer.css("margin-top", $superGroupMenuWrap.css("height"));
+		$superGroupContentWrap.css("margin-top", $scontainer.css("height"));
+	});
+	
+	/* Need to do this close thing properly.  For example, if there are two sticky 
+	announcements, then margin-top should not be 0!!! Also, I'm setting two events here. */
+	$(".close").on("click", function() {
+		$superGroupContentWrap.css("margin-top", 0);
+	});
+
+	var $close = $('.close');
+  	$superGroupContentWrap.on('transitionend', function() {
+ 		$superGroupContentWrap.removeClass('closing');
+ 	});
+
+ 	$close.on('click', function() {
+ 		$superGroupContentWrap.addClass('closing');
+	});
 	/* Sticky navbar */
 	/* https://teamtreehouse.com/community/forum-tip-create-a-sticky-navigation-with-css-and-jquery-2 */
 	//
