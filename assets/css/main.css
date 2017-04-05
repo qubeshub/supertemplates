@@ -315,6 +315,14 @@ as most (if not all) messages are temporary */
     width: 100%;
 }
 
+/* Fixing issue where notice banner becomes > 100% */
+.modnotices {
+	padding: 0.61803399em 0 0.61803399em 0 !important;
+}
+.modnotices p {
+    padding-left: 3em !important;
+}
+
 /* Group announcements */
 /* Note that javascript in main.js needs to move .super-group-content-wrap down by the vertical 
 height of this element, as we are specifying that .scontainer be below menu but above content. 
@@ -324,11 +332,6 @@ automatic element placement by the Hub. */
 	position: absolute;
 	margin-top: 40px;	/* Relative to .super-group-menu-wrap - javascript will change this */
 	width: 100%;
-}
-
-.closing {
-	margin-top: 0px;
-	transition: margin-top 1s linear;
 }
 
 /* Sticky navbar */

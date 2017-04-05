@@ -78,20 +78,11 @@ jQuery(document).ready(function(jq) {
 		$superGroupContentWrap.css("margin-top", $scontainer.css("height"));
 	});
 	
-	/* Need to do this close thing properly.  For example, if there are two sticky 
-	announcements, then margin-top should not be 0!!! Also, I'm setting two events here. */
-	$(".close").on("click", function() {
-		$superGroupContentWrap.css("margin-top", 0);
+	/* Readjust content after closing announcement */
+	$('.announcement .close').on('click', function() {
+		$superGroupContentWrap.animate({marginTop: '-=' + $(this).parent().parent().outerHeight() + 'px'});
 	});
-
-	var $close = $('.close');
-  	$superGroupContentWrap.on('transitionend', function() {
- 		$superGroupContentWrap.removeClass('closing');
- 	});
-
- 	$close.on('click', function() {
- 		$superGroupContentWrap.addClass('closing');
-	});
+  	
 	/* Sticky navbar */
 	/* https://teamtreehouse.com/community/forum-tip-create-a-sticky-navigation-with-css-and-jquery-2 */
 	//
