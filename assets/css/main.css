@@ -345,7 +345,7 @@ automatic element placement by the Hub. */
 }
 /* Offset by height of bar, and make sure in the back */
 .super-group-header-wrap {
-	top: 44px;
+	top: 44.5px;
 	z-index: -100;
 }
 /* Fixed at top */
@@ -361,11 +361,11 @@ automatic element placement by the Hub. */
 .super-group-menu-wrap {
 	z-index: 150;
 	box-shadow: 0 2px 3px rgba(0,0,0,0.4);
-	margin-bottom: -44px;
+	margin-bottom: -40px;
 }
 .super-group-menu-scrolled {
 	position: fixed;	/* Same as .super-group-header-wrap */
-	top: 44px;			/* Same as .super-group-header-wrap */
+	top: 44.5px;			/* Same as .super-group-header-wrap */
 	width: 100%;		/* Same as .super-group-header-wrap */
 }
 .header-id {
