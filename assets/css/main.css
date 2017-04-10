@@ -365,7 +365,7 @@ automatic element placement by the Hub. */
 }
 .super-group-menu-scrolled {
 	position: fixed;	/* Same as .super-group-header-wrap */
-	top: 44.5px;			/* Same as .super-group-header-wrap */
+	top: 44px;			/* Same as .super-group-header-wrap */
 	width: 100%;		/* Same as .super-group-header-wrap */
 }
 .header-id {
