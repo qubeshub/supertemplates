@@ -66,6 +66,23 @@ jQuery(document).ready(function(jq) {
 		Enter custom JS code here.
 	*/
 	
+	/* Fix content for sticky group announcements. */
+	var $scontainer = $(".scontainer");
+	var $superGroupMenuWrap = $(".super-group-menu-wrap");
+	var $superGroupContentWrap = $(".super-group-content-wrap");
+
+	$scontainer.css("margin-top", $superGroupMenuWrap.css("height"));
+	$superGroupContentWrap.css("margin-top", $scontainer.css("height"));
+	new ResizeSensor(jQuery('.super-group-menu-wrap'), function() {
+		$scontainer.css("margin-top", $superGroupMenuWrap.css("height"));
+		$superGroupContentWrap.css("margin-top", $scontainer.css("height"));
+	});
+	
+	/* Readjust content after closing announcement */
+	$('.announcement .close').on('click', function() {
+		$superGroupContentWrap.animate({marginTop: '-=' + $(this).parent().parent().outerHeight() + 'px'});
+	});
+  	
 	/* Sticky navbar */
 	/* https://teamtreehouse.com/community/forum-tip-create-a-sticky-navigation-with-css-and-jquery-2 */
 	//
