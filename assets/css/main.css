@@ -12,7 +12,7 @@
 	background: #45611F;
 	min-width: inherit;
 }
-/**
+/** 
  * BEGIN header buttons
  * The next two are for the Getting Started buttons in upper left 
  **/
@@ -245,6 +245,10 @@
 .super-group-content .section {
 	padding: 0 !important;
 	margin: 20px 0 !important;
+}
+
+a:hover {
+	border: none;
 }
 
 /* Footer */

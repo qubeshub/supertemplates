@@ -5,10 +5,24 @@
  * Template used for Special Groups. Will now be auto-created
  * when admin switches group from type HUB to type Special.
  *
- * @author     HUBzero
- * @copyright  December 2015
+ * @author     HUBzero, M. Drew LaMar
+ * @copyright  December 2015, March 2017
  */
  
+// $sections = Event::trigger('groups.onGroupAreas', array());
+// print_r ( $sections );
+
+use Components\Groups\Models\Page\Archive;
+
+// Build the pages for menu
+$pageArchive = Archive::getInstance();
+$pages = $pageArchive->pages('tree', array(
+	'gidNumber' => $this->group->get('gidNumber'),
+	'state'     => array(1),
+	'orderby'   => 'lft ASC'
+), true);
+
+// Grab logo
 if ($this->group->get('logo') == NULL) {
 	$logo = NULL;
 } else {
@@ -29,7 +43,6 @@ if ($this->group->get('logo') == NULL) {
 					<img src="<?php echo $logo ?>" class="header-id-logo">
 				<?php endif; ?>
 				<span><?php echo $this->group->get('description'); ?></span>
-				<!-- <span>[<?php echo $this->group->get('cn'); ?>]</span> -->
 			</a>
 		</h1>
 	</div>
@@ -38,7 +51,7 @@ if ($this->group->get('logo') == NULL) {
 <div class="super-group-menu-wrap">
 	<div class="super-group-menu">
 		<!-- ###  Start Menu Include  ### -->
-		<group:include type="menu" />
+		<?php include_once dirname(__DIR__) . DS . 'helpers' . DS . 'menu.php'; ?>
 		<!-- ###  End Menu Include  ### -->
 	</div>
 </div>

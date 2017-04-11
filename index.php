@@ -64,11 +64,11 @@ Document::addScript($base . DS . 'assets/js/ElementQueries.js');
 					<group:include type="content" />
 				<!-- ###  End Content Include  ### -->
 <?php if (!$no_html) : ?>
-			</div>
 		</div>
-
-		<?php include_once 'includes/footer.php'; ?>
 	</div>
+
+	<?php include_once 'includes/footer.php'; ?>
+</div>
 </div>
 
 <group:include type="googleanalytics" account="" />
