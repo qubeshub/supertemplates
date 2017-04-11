@@ -8,13 +8,27 @@
  * @author     HUBzero
  * @copyright  December 2015
  */
+ 
+if ($this->group->get('logo') == NULL) {
+	$logo = NULL;
+} else {
+	$logo = rtrim(str_replace(PATH_ROOT, '', __DIR__), 'template/includes') . DS . 'uploads' . DS . $this->group->get('logo');
+}
 ?>
 
 <div class="super-group-header-wrap">
 	<div class="super-group-header cf">
-		<h1>
+	</div>
+</div>
+
+<div class="super-group-header-overlay-wrap">
+	<div class="super-group-header-overlay">
+		<h1 class="header-id">
 			<a href="<?php echo Route::url('index.php?option=com_groups&cn=' . $this->group->get('cn')); ?>" title="<?php echo $this->group->get('description'); ?> Home">
-				<?php echo $this->group->get('description'); ?>
+				<?php if ($logo) : ?>
+					<img src="<?php echo $logo ?>" class="header-id-logo">
+				<?php endif; ?>
+				<span><?php echo $this->group->get('description'); ?></span>
 				<!-- <span>[<?php echo $this->group->get('cn'); ?>]</span> -->
 			</a>
 		</h1>

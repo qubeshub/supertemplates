@@ -9,7 +9,7 @@
  */
 
 #group-body {
-	background: #666;
+	background: #45611F;
 	min-width: inherit;
 }
 /**
@@ -36,38 +36,56 @@
 
 /* Header */
 .super-group-header-wrap {
-	background: #444;
-	border-top: 1px solid #555;
-	/*height: 75px;*/
-	padding: 0 20px;
+	margin-top: 0px;
+	height: 150px;
+	background-image: none;	/* Changed within index.php to point to banner.jpg or banner.png */
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center center;
+	background-size: cover;
 }
 .super-group-header {
 	margin: 0;
 	width: 100%;
 	position: relative;
 }
-.super-group-header h1 {
-	/*position: absolute;
-	top: 18px;
-	left: 0;*/
+.super-group-header-overlay-wrap {
+	/* height: 150px; */
+	position: absolute;
+	width:100%;
+	top: -150px;
+}
+.super-group-header-overlay {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.3+100 */ /* FF3.6-15 */ /* Chrome10-25,Safari5.1-6 */
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%);
+	background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#4d000000',GradientType=0 ); /* IE6-9 */
+	height: 150px;
+}
+.super-group-header-overlay h1 {
+	position: absolute;
+	top: 80px;
+	left: 20px;
 	margin: 0.5em 0;
 	padding: 0;
+	z-index: 1000;
 }
-.super-group-header h1 a {
+.super-group-header-overlay h1 a {
 	display: block;
-	font-weight: 100;
-	/*font-size: 30px;
-	line-height: 36px;*/
-	font-size: 1.2em;
-	line-height: 1.2em;
+	/* font-weight: 100;
+	font-size: 30px;
+	line-height: 36px; */
+	font-size: 1.1em;
+	line-height: 1.1em;
 	color: #FFF;
-	font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+	font-family: 'Martel', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
 	border: none !important;
 }
-.super-group-header h1 a span {
-	color: #777;
+.super-group-header-overlay h1 a span {
+	position: relative;
+	left: 4px;
 }
-.super-group-header h1 a:hover {
+.super-group-header-overlay h1 a:hover {
 	border: none !important;
 }
 
@@ -89,10 +107,7 @@
 }
 .super-group-menu a {
 	-webkit-transition: background 0.1s ease-in-out;
-	   -moz-transition: background 0.1s ease-in-out;
-	    -ms-transition: background 0.1s ease-in-out;
-	     -o-transition: background 0.1s ease-in-out;
-	        transition: background 0.1s ease-in-out;
+	transition: background 0.1s ease-in-out;
 }
 .super-group-menu > ul li {
 	float: left;
@@ -200,11 +215,10 @@
 
 /* Content */
 .super-group-content-wrap {
-	margin: 0;
-	padding: 0;
+	margin: 0;	/* margin-top will be changed by javascript to height of scontainer */
 	font-size: 1.2em;
 	min-height: 300px;
-	padding: 0 20px 40px 20px !important;
+	padding: 50px 20px 40px 20px !important;	/* Sticky navbar: Top = 50px */
 }
 .super-group-content {
 	margin: 0;
@@ -235,7 +249,7 @@
 
 /* Footer */
 .super-group-footer-wrap {
-	background: #666;
+	background: #45611F;
 	padding: 0 20px;
 }
 .super-group-footer {
@@ -243,7 +257,10 @@
 	width: 100%;
 	padding: 20px 0 40px 0;
 	font-size: 11px;
-	color: #999;
+	color: #FFF;
+}
+.super-group-footer a {
+	color: #8bc240;
 }
 
 /* Home Page */
@@ -286,6 +303,111 @@
 /* Login */
 .group_login > h2:first-child {
 	display: none;
+}
+/* System messages */
+/* #sitenotice contains site notices from mod_notices */
+/* #system-message-container contains site messages - right now, I'm okay if they overlap
+as most (if not all) messages are temporary */
+#sitenotice, #system-message-container {
+	position: absolute;
+    top: 44px;
+    z-index: 1;
+    width: 100%;
+}
+
+/* Fixing issue where notice banner becomes > 100% */
+.modnotices {
+	padding: 0.61803399em 0 0.61803399em 0 !important;
+}
+.modnotices p {
+    padding-left: 3em !important;
+}
+
+/* Group announcements */
+/* Note that javascript in main.js needs to move .super-group-content-wrap down by the vertical 
+height of this element, as we are specifying that .scontainer be below menu but above content. 
+Also note that utilizing javascript is the only way I know how to move this around given it's 
+automatic element placement by the Hub. */
+.scontainer {
+	position: absolute;
+	margin-top: 40px;	/* Relative to .super-group-menu-wrap - javascript will change this */
+	width: 100%;
+}
+
+/* Sticky navbar */
+/* https://teamtreehouse.com/community/forum-tip-create-a-sticky-navigation-with-css-and-jquery-2 */
+#group-body {
+	padding-top: 194px;
+}
+/* Bar needs to be at top */
+.super-group-bar {
+	top: 0;
+}
+/* Offset by height of bar, and make sure in the back */
+.super-group-header-wrap {
+	top: 44.5px;
+	z-index: -100;
+}
+/* Fixed at top */
+.super-group-header-wrap,
+.super-group-bar {
+	position: fixed;
+	width: 100%;
+}
+.super-group-menu-wrap,
+.super-group-body-wrap {
+	position: relative;
+}
+.super-group-menu-wrap {
+	z-index: 150;
+	box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+	margin-bottom: -40px;
+}
+.super-group-menu-scrolled {
+	position: fixed;	/* Same as .super-group-header-wrap */
+	top: 44px;			/* Same as .super-group-header-wrap */
+	width: 100%;		/* Same as .super-group-header-wrap */
+}
+.header-id {
+ -webkit-transition: -webkit-transform .2s ease-in-out;
+ transition: -webkit-transform .2s ease-in-out;
+ transition: transform .2s ease-in-out;
+ transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
+	-webkit-transform-origin: 0 50%;
+	    -ms-transform-origin: 0 50%;
+	        transform-origin: 0 50%;
+}
+.header-id-scrolled {
+	position: fixed !important;
+	top: -9px !important;
+ -webkit-transform: scale(0.75);
+     -ms-transform: scale(0.75);
+         transform: scale(0.75);
+	-webkit-transform-origin: 0 50%;
+	    -ms-transform-origin: 0 50%;
+	        transform-origin: 0 50%;
+}
+.header-id-logo {
+	position: relative;
+	height: 36px;
+	bottom: 2px;
+}
+/* Need to take care of group-info */
+#group-info {
+	top: 44px;
+	position: fixed;
+	width: 100%;
+	z-index: 1001;
+}
+
+/* Anchors need to adjust position to accomodate header */
+/* Source:  http://stackoverflow.com/questions/4086107/html-positionfixed-page-header-and-in-page-anchors */
+/* Note:  Should use javascript, as header can change size depending on zoom level */
+:target:before {
+  content:"";
+  display:block;
+  height: 90px; /* fixed header height*/
+  margin: -90px 0 0; /* negative fixed header height */
 }
 
 /* Responsive */

@@ -65,4 +65,59 @@ jQuery(document).ready(function(jq) {
 	/*
 		Enter custom JS code here.
 	*/
+	
+	/* Fix content for sticky group announcements. */
+	var $scontainer = $(".scontainer");
+	var $superGroupMenuWrap = $(".super-group-menu-wrap");
+	var $superGroupContentWrap = $(".super-group-content-wrap");
+
+	$scontainer.css("margin-top", $superGroupMenuWrap.css("height"));
+	$superGroupContentWrap.css("margin-top", $scontainer.css("height"));
+	new ResizeSensor(jQuery('.super-group-menu-wrap'), function() {
+		$scontainer.css("margin-top", $superGroupMenuWrap.css("height"));
+		$superGroupContentWrap.css("margin-top", $scontainer.css("height"));
+	});
+	
+	/* Readjust content after closing announcement */
+	$('.announcement .close').on('click', function() {
+		$superGroupContentWrap.animate({marginTop: '-=' + $(this).parent().parent().outerHeight() + 'px'});
+	});
+  	
+	/* Sticky navbar */
+	/* https://teamtreehouse.com/community/forum-tip-create-a-sticky-navigation-with-css-and-jquery-2 */
+	//
+	// Bug in login - had to comment out the following line 
+	//		$('#username, #password').placeholder();
+	// in the file /www/dev/core/components/com_users/site/assets/js/login.js
+	// to get it to work.
+	
+	var sgmw = $(".super-group-menu-wrap");
+	var sgpb = document.getElementsByClassName("poweredby")[0];
+	var sgid = $(".header-id");
+	
+	$(window).scroll(function() {
+		var st = $(this).scrollTop();
+		if (st > 100) {
+			sgpb.style["opacity"] = Math.max(1 - (1/25)*(st-100), 0);
+			sgpb.style["cursor"] = "default";
+			sgpb.style["pointerEvents"] = "none";
+		} else {
+			sgpb.style["opacity"] = 1.0;
+			sgpb.style["cursor"] = "inherit";	// Doesn't reset properly on Firefox
+			sgpb.style["pointerEvents"] = "inherit";
+		}
+
+		if (st > 130) {
+			sgid.addClass("header-id-scrolled");
+		} else {
+			sgid.removeClass("header-id-scrolled");
+		}
+		
+		if (st > 150) {
+			sgmw.addClass("super-group-menu-scrolled");
+		} else {
+			sgmw.removeClass("super-group-menu-scrolled");
+		}
+	});
+	
 });
