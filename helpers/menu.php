@@ -80,7 +80,7 @@ class View
 				if (($pageAccess == 'registered' && User::isGuest()) ||
 				  ($pageAccess == 'members' && !in_array(User::get("id"), $group->get('members'))))
 				{
-					/* $out .= "<li class=\"protected\"><span class=\"page\">" . $page->get('title') . "</span></li>"; */
+					$out .= "<li class=\"protected\"><span class=\"page\">" . $page->get('title') . "</span></li>";
 				}
 				else
 				{
