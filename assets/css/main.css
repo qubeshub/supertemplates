@@ -179,12 +179,24 @@
 	color: #efefef;
 	font-size: 0.9em;	/* Slightly smaller for dropdown */
 }
-.super-group-menu ul ul li a:before {
-	content: '\203A';
+
+/*** BEGIN SUBMENU ARROWS ***/
+/* https://css-tricks.com/targetting-menu-elements-submenus-navigation-bar/ */
+.super-group-menu li a:first-child:nth-last-child(2):after {
+	content: '\2304';
 	font-family: 'Fontcons';
-	margin-right: 5px;
+	margin-left: 5px;
 	font-size: 10px;
 }
+
+.super-group-menu li li a:first-child:nth-last-child(2):after {
+	content: '\203A';
+	font-family: 'Fontcons';
+	float: right;
+	font-size: 10px;
+}
+/*** END SUBMENU ARROWS ***/
+
 .super-group-menu ul ul li a:hover {
 	background: rgba(0,0,0,0.4);
 }
