@@ -20,8 +20,8 @@ $no_html = Request::getInt('no_html', 0);
 
 // add stylesheets and scripts
 Document::addStyleSheet("https://fonts.googleapis.com/css?family=Martel:200");
-Document::addStyleSheet($base . DS . 'assets/css/main.css');
-Document::addScript($base . DS . 'assets/js/main.js');
+Document::addStyleSheet($base . '/assets/css/main.css?v=' . filemtime(__DIR__ . '/assets/css/main.css'));
+Document::addScript($base . '/assets/js/main.js?v=' . filemtime(__DIR__ . '/assets/js/main.js'));
 Document::addScript($base . DS . 'assets/js/ResizeSensor.js');
 Document::addScript($base . DS . 'assets/js/ElementQueries.js');
 ?>
@@ -61,7 +61,7 @@ Document::addScript($base . DS . 'assets/js/ElementQueries.js');
 				<?php endif; ?>
 <?php endif; ?>
 				<!-- ###  Start Content Include  ### -->
-					<group:include type="content" />
+				<group:include type="content" />
 				<!-- ###  End Content Include  ### -->
 <?php if (!$no_html) : ?>
 		</div>
