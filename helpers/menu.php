@@ -50,7 +50,7 @@ class View
 	 * @param  [type] $pageArray [description]
 	 * @return [type]            [description]
 	 */
-	public static function buildRecursivePageMenu($group, $pageArray)
+	public static function buildRecursivePageMenu($group, $pageArray, $pageids)
 	{
 		// get overview section access
 		$access = \Hubzero\User\Group\Helper::getPluginAccess($group, 'overview');
@@ -88,14 +88,23 @@ class View
 					$out .= '<a class="page" title="' . $page->get('title') . '" href="' . $page->url() . '">' . $page->get('title') . '</a>';
 				}
 
-				// do we have child menu items
+				// do we have child menu items				
 				if (!is_array($page->get('children')))
 				{
 					$out .= '</li>';
 				}
 				else
 				{
-					$out .= self::buildRecursivePageMenu($group, $page->get('children')) . '</li>';
+					$submenupages = $page->get('children');
+					$submenupages = array_filter($submenupages, function($page) use ($pageids) {
+						return in_array($page->get('id'), $pageids);
+					});
+
+					if (count($submenupages) > 0) {
+						$out .= self::buildRecursivePageMenu($group, $submenupages, $pageids) . '</li>';
+					} else {
+						$out .= '</li>';
+					}
 				}
 			}
 			$out .= '</ul>';
@@ -111,9 +120,22 @@ class View
  *
  */
 
-//if we are on the overview tab and we have group pages
+// Get list of pages from group 
+$db = App::get('db');
+$db->setQuery(
+	"SELECT p.id
+	FROM `#__xgroups_pages` AS p
+	INNER JOIN `#__xgroups_pages_categories` AS c ON c.id=p.category
+	WHERE c.title=" . $db->quote('menu')
+	);
+$pageids = array_map(function($element){return $element->id;}, $db->loadObjectList());
+
 if (count($pages) > 0)
 {
+	$menupages = $pages[0]->get('children');
+	$menupages = array_filter($menupages, function($page) use ($pageids) {
+		return in_array($page->get('id'), $pageids);
+	});
 	// Gets the active page/tab and stores in trueTab
 	//   This seems to give the same answer as $this->tab???
 	//	 Not sure why this is necessary.
@@ -123,7 +145,7 @@ if (count($pages) > 0)
 	// append pages html
 	// only pass in the children of the root node
 	// basically skip the overview page here
-	$item = View::buildRecursivePageMenu($this->group, $pages[0]->get('children'));
+	$item = View::buildRecursivePageMenu($this->group, $menupages, $pageids);
 	
 	echo $item;
 }
