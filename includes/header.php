@@ -13,6 +13,7 @@
 // print_r ( $sections );
 
 use Components\Groups\Models\Page\Archive;
+use Components\Groups\Helpers\View;
 
 // Build the pages for menu
 $pageArchive = Archive::getInstance();
@@ -21,6 +22,14 @@ $pages = $pageArchive->pages('tree', array(
 	'state'     => array(1),
 	'orderby'   => 'lft ASC'
 ), true);
+
+// Rather than rewrite this code, gonna do some string magic.
+$something = View::displaySections($this->group, 'class="cf"');
+$pos1 = strpos($something, 'group-overview-tab');	// Find overview-tab
+$pos2 = strpos($something, 'group-', $pos1 + strlen('group-overview-tab')); // Find next group area
+$fred = substr($something, 0, $pos2); // Consider string up to that point
+$pos3 = strrpos($fred, "<li class=");	// Search backwards for beginning of list item
+$community = substr($something, $pos3);	// Cut off string up to this point
 
 // Grab logo
 if ($this->group->get('logo') == NULL) {

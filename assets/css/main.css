@@ -180,6 +180,13 @@
 	font-size: 0.9em;	/* Slightly smaller for dropdown */
 }
 
+/* Getting ready for group activity icon */
+.super-group-menu ul .group-icon {
+	content: '\f042';
+	font-family: 'Fontcons';
+	font-size: 40px;
+}
+
 /*** BEGIN SUBMENU ARROWS ***/
 /* https://css-tricks.com/targetting-menu-elements-submenus-navigation-bar/ */
 .super-group-menu li a:first-child:nth-last-child(2):after {
