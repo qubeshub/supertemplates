@@ -16,4 +16,13 @@ function initMenu() {
 	);
 }
 
-$(document).ready(function() {initMenu();});
+function adjustContentBody() {
+	$('.super-group-content-wrap').css("min-height", function() {
+		return $('#sidebar-wrapper').height()+30;
+	});
+}
+
+$(document).ready(function() {
+	initMenu();
+	adjustContentBody();
+});

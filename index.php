@@ -1,12 +1,9 @@
 <?php
 /**
- * Basic Template
+ * Template Name: Sidebar Template
  *
- * Template used for Special Groups. Will now be auto-created
- * when admin switches group from type HUB to type Special.
- *
- * @author 		Christopher Smoak
- * @copyright	December 2012
+ * @author 	M. Drew LaMar
+ * @copyright	December 2016
  */
 
 // define base path (without doc root)
@@ -20,10 +17,13 @@ $no_html = Request::getInt('no_html', 0);
 
 // add stylesheets and scripts
 Document::addStyleSheet("https://fonts.googleapis.com/css?family=Martel:200");
+Document::addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 Document::addStyleSheet($base . '/assets/css/main.css?v=' . filemtime(__DIR__ . '/assets/css/main.css'));
+Document::addStyleSheet($base . '/assets/css/sidebar.css?v=' . filemtime(__DIR__ . '/assets/css/sidebar.css'));
 Document::addScript($base . '/assets/js/main.js?v=' . filemtime(__DIR__ . '/assets/js/main.js'));
-Document::addScript($base . DS . 'assets/js/ResizeSensor.js');
-Document::addScript($base . DS . 'assets/js/ElementQueries.js');
+Document::addScript($base . '/assets/js/sidebar.js?v=' . filemtime(__DIR__ . '/assets/js/sidebar.js'));
+Document::addScript($base . '/assets/js/ResizeSensor.js');
+Document::addScript($base . '/assets/js/ElementQueries.js');
 ?>
 
 <!-- begin: modify css for banner image -->
@@ -51,24 +51,33 @@ Document::addScript($base . DS . 'assets/js/ElementQueries.js');
 		<?php include_once 'includes/header.php'; ?>
 
 		<div class="super-group-content-wrap">
+
+			<!-- ###  Start Sideber ### -->
+			<!-- Sidebar -->
+			<div id="sidebar-wrapper">
+				<?php include_once 'includes/sidebar-menu.php'; ?>
+			</div><!-- /#sidebar-wrapper -->
+			<!-- ###  End Sideber ### -->
+
 			<div class="super-group-content group_<?php echo $this->tab; ?>">
 				<?php
-					$title = (isset($this->page) && $this->page->get('title')) ? '' : Lang::txt('PLG_GROUPS_' . strtoupper($this->tab));
-					$title = ($title == 'PLG_GROUPS_' . strtoupper($this->tab) ? ucfirst($this->tab) : $title);
-					if ($title != '') :
-				?>
-					<h2><?php echo $title; ?></h2>
-				<?php endif; ?>
-<?php endif; ?>
-				<!-- ###  Start Content Include  ### -->
-				<group:include type="content" />
-				<!-- ###  End Content Include  ### -->
-<?php if (!$no_html) : ?>
-		</div>
-	</div>
+				$title = (isset($this->page) && $this->page->get('title')) ? '' : Lang::txt('PLG_GROUPS_' . strtoupper($this->tab));
+				$title = ($title == 'PLG_GROUPS_' . strtoupper($this->tab) ? ucfirst($this->tab) : $title);
+				if ($title != '') :
+					?>
+				<h2><?php echo $title; ?></h2>
+			<?php endif; ?>
+			<!-- <?php endif; ?> -->
+			<!-- ###  Start Content Include  ### -->
+			<group:include type="content" />
+			<!-- ###  End Content Include  ### -->
+			<?php if (!$no_html) : ?>
+			</div><!-- /.super-group-content -->
 
-	<?php include_once 'includes/footer.php'; ?>
-</div>
+		</div><!-- /.super-group-content-wrap -->
+
+		<?php include_once 'includes/footer.php'; ?>
+	</div>
 </div>
 
 <group:include type="googleanalytics" account="" />

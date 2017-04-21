@@ -57,7 +57,6 @@
 }
 .super-group-header-overlay {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.3+100 */ /* FF3.6-15 */ /* Chrome10-25,Safari5.1-6 */
-	background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%);
 	background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#4d000000',GradientType=0 ); /* IE6-9 */
 	height: 150px;
@@ -106,7 +105,6 @@
 	list-style: none;
 }
 .super-group-menu a {
-	-webkit-transition: background 0.1s ease-in-out;
 	transition: background 0.1s ease-in-out;
 }
 .super-group-menu > ul li {
@@ -368,7 +366,7 @@ automatic element placement by the Hub. */
 }
 /* Offset by height of bar, and make sure in the back */
 .super-group-header-wrap {
-	top: 44.5px;
+	top: 44px;
 	z-index: -100;
 }
 /* Fixed at top */
@@ -392,23 +390,14 @@ automatic element placement by the Hub. */
 	width: 100%;		/* Same as .super-group-header-wrap */
 }
 .header-id {
- -webkit-transition: -webkit-transform .2s ease-in-out;
- transition: -webkit-transform .2s ease-in-out;
  transition: transform .2s ease-in-out;
- transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
-	-webkit-transform-origin: 0 50%;
-	    -ms-transform-origin: 0 50%;
-	        transform-origin: 0 50%;
+	transform-origin: 0 50%;
 }
 .header-id-scrolled {
 	position: fixed !important;
 	top: -9px !important;
- -webkit-transform: scale(0.75);
-     -ms-transform: scale(0.75);
-         transform: scale(0.75);
-	-webkit-transform-origin: 0 50%;
-	    -ms-transform-origin: 0 50%;
-	        transform-origin: 0 50%;
+ 	transform: scale(0.75);
+	transform-origin: 0 50%;
 }
 .header-id-logo {
 	position: relative;

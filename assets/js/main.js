@@ -94,6 +94,7 @@ jQuery(document).ready(function(jq) {
 	var sgmw = $(".super-group-menu-wrap");
 	var sgpb = document.getElementsByClassName("poweredby")[0];
 	var sgid = $(".header-id");
+	var sgsb = $("#sidebar-wrapper");
 	
 	$(window).scroll(function() {
 		var st = $(this).scrollTop();
@@ -115,8 +116,10 @@ jQuery(document).ready(function(jq) {
 		
 		if (st > 150) {
 			sgmw.addClass("super-group-menu-scrolled");
+			sgsb.addClass("sidebar-wrapper-scrolled");
 		} else {
 			sgmw.removeClass("super-group-menu-scrolled");
+			sgsb.removeClass("sidebar-wrapper-scrolled");
 		}
 	});
 	
