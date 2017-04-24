@@ -69,7 +69,12 @@
     line-height: 40px;
     margin: 0;
 }
- 
+
+.sidebar-nav a,
+.sidebar-nav a:active {
+	border-bottom: none;
+}
+
 .sidebar-nav li a,
 .sidebar-nav li span {
     position: relative;
@@ -115,7 +120,15 @@
 .sidebar-nav li a:before,
 .sidebar-nav li span:before {
     content: attr(data-icon);
-    margin-right: 15px;
+}
+
+.sidebar-nav li a:before,
+.sidebar-nav li span:before {
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: -0.7em;
+    margin-top: -1em;
+    margin-right: 1.2em;
 }
 
 .sidebar-nav li span:before {
@@ -142,7 +155,7 @@
 #page-menu li .meta {
     position: absolute;
     right: 0.5em;
-    margin-top: -5em;
+    margin-top: -2.4em;
     padding: 0;
 }
 
