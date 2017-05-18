@@ -232,6 +232,7 @@
 
 /* Content */
 .super-group-content-wrap {
+	position: relative;
 	margin: 0;	/* margin-top will be changed by javascript to height of scontainer */
 	font-size: 1.2em;
 	min-height: 300px;

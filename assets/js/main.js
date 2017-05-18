@@ -91,35 +91,73 @@ jQuery(document).ready(function(jq) {
 	// in the file /www/dev/core/components/com_users/site/assets/js/login.js
 	// to get it to work.
 	
-	var sgmw = $(".super-group-menu-wrap");
-	var sgpb = document.getElementsByClassName("poweredby")[0];
-	var sgid = $(".header-id");
-	var sgsb = $("#sidebar-wrapper");
+	var $menuWrap = $(".super-group-menu-wrap");
+	var $headerId = $(".header-id");
+	var $sidebarWrap = $("#sidebar-wrapper");
+	var $footerWrap = $(".super-group-footer-wrap");
+	var poweredBy = document.getElementsByClassName("poweredby")[0];
+
+	var scrollTop = 0;
+	var bannerHeight = $(".super-group-header-overlay").height();
+	var barHeight = $(".super-group-bar").height();
 	
 	$(window).scroll(function() {
-		var st = $(this).scrollTop();
-		if (st > 100) {
-			sgpb.style["opacity"] = Math.max(1 - (1/25)*(st-100), 0);
-			sgpb.style["cursor"] = "default";
-			sgpb.style["pointerEvents"] = "none";
+		var windowTop = $(this).scrollTop();
+		var footerWindowTop = $footerWrap[0].getBoundingClientRect().top
+		var menuWindowBottom = $menuWrap[0].getBoundingClientRect().bottom
+
+		if (windowTop > scrollTop) {
+			// Down
+			// $sidebarWrap[0].style["background-color"] = "#FF0000";
 		} else {
-			sgpb.style["opacity"] = 1.0;
-			sgpb.style["cursor"] = "inherit";	// Doesn't reset properly on Firefox
-			sgpb.style["pointerEvents"] = "inherit";
+			// Up
+			// $sidebarWrap[0].style["background-color"] = "#00FF00";
+		}
+		scrollTop = windowTop;
+
+		// Fade effect for "poweredby QUBES"
+		var startBarFade = bannerHeight - barHeight;
+		if (windowTop > startBarFade) {
+			poweredBy.style["opacity"] = Math.max(1 - (4/startBarFade)*(windowTop-startBarFade), 0);
+			poweredBy.style["cursor"] = "default";
+			poweredBy.style["pointerEvents"] = "none";
+		} else {
+			poweredBy.style["opacity"] = 1.0;
+			poweredBy.style["cursor"] = "inherit";	// Doesn't reset properly on Firefox
+			poweredBy.style["pointerEvents"] = "inherit";
 		}
 
-		if (st > 130) {
-			sgid.addClass("header-id-scrolled");
+		// Replace "poweredby QUBES" with group logo and title
+		if (windowTop > bannerHeight - (barHeight/2)) {
+			$headerId.addClass("header-id-scrolled");
 		} else {
-			sgid.removeClass("header-id-scrolled");
+			$headerId.removeClass("header-id-scrolled");
 		}
 		
-		if (st > 150) {
-			sgmw.addClass("super-group-menu-scrolled");
-			sgsb.addClass("sidebar-wrapper-scrolled");
+		// Fix menu directly under QUBES navbar on scroll
+		if (windowTop > bannerHeight) {
+			$menuWrap.addClass("super-group-menu-scrolled");
 		} else {
-			sgmw.removeClass("super-group-menu-scrolled");
-			sgsb.removeClass("sidebar-wrapper-scrolled");
+			$menuWrap.removeClass("super-group-menu-scrolled");
+		}
+
+		// Fix sidebar directly under menu after announcements have scrolled
+		// $sidebarWrap[0].getBoundingClientRect().bottom + parseFloat($sidebarWrap.css("margin-bottom")) < $footerWrap[0].getBoundingClientRect().top)
+		// 
+		var sidebarIsAboveFooter = (((footerWindowTop - menuWindowBottom) - $sidebarWrap.outerHeight(true)) > 0);
+		if (sidebarIsAboveFooter) {
+			if (windowTop > bannerHeight + $scontainer.height()) {
+				$sidebarWrap.addClass("sidebar-wrapper-scrolled");
+				$sidebarWrap.css("top", "94px");
+				$sidebarWrap.css("bottom", "");
+			} else {
+				$sidebarWrap.removeClass("sidebar-wrapper-scrolled");
+				$sidebarWrap.css("top", "50px");				
+			}
+		} else {
+			$sidebarWrap.removeClass("sidebar-wrapper-scrolled");
+			$sidebarWrap.css("bottom", "-9px");
+			$sidebarWrap.css("top", "");
 		}
 	});
 	

@@ -16,6 +16,7 @@ function initMenu() {
 	);
 }
 
+// Make sure content area is at least as large as sidebar, plus wiggle room
 function adjustContentBody() {
 	$('.super-group-content-wrap').css("min-height", function() {
 		return $('#sidebar-wrapper').height()+30;
@@ -23,6 +24,6 @@ function adjustContentBody() {
 }
 
 $(document).ready(function() {
-	initMenu();
+	// initMenu();   // Not sure what this does anymore.  Commenting out for now.
 	adjustContentBody();
 });
