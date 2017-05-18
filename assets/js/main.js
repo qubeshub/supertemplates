@@ -133,28 +133,29 @@ jQuery(document).ready(function(jq) {
 			$headerId.removeClass("header-id-scrolled");
 		}
 		
-		// Fix menu directly under QUBES navbar on scroll
+		// Fix menu directly under QUBES navbar
 		if (windowTop > bannerHeight) {
 			$menuWrap.addClass("super-group-menu-scrolled");
 		} else {
 			$menuWrap.removeClass("super-group-menu-scrolled");
 		}
 
-		// Fix sidebar directly under menu after announcements have scrolled
+		// Fix sidebar directly under menu after announcements
+		if (windowTop > bannerHeight + $scontainer.height()) {
+			$sidebarWrap.addClass("sidebar-wrapper-scrolled");
+			$sidebarWrap.css("top", "94px");
+			$sidebarWrap.css("bottom", "");
+		} else {
+			$sidebarWrap.removeClass("sidebar-wrapper-scrolled");
+			$sidebarWrap.css("top", "50px");				
+		}
+
+		// Put sidebar at bottom when footer starts to encroach and scroll with page
 		// $sidebarWrap[0].getBoundingClientRect().bottom + parseFloat($sidebarWrap.css("margin-bottom")) < $footerWrap[0].getBoundingClientRect().top)
 		if (windowTop > (bannerHeight + $scontainer.height() + $contentWrap.height() - $sidebarWrap.outerHeight())) {
 			$sidebarWrap.removeClass("sidebar-wrapper-scrolled");
 			$sidebarWrap.css("bottom", "-9px");
 			$sidebarWrap.css("top", "");
-		} else {
-			if (windowTop > bannerHeight + $scontainer.height()) {
-				$sidebarWrap.addClass("sidebar-wrapper-scrolled");
-				$sidebarWrap.css("top", "94px");
-				$sidebarWrap.css("bottom", "");
-			} else {
-				$sidebarWrap.removeClass("sidebar-wrapper-scrolled");
-				$sidebarWrap.css("top", "50px");				
-			}
 		}
 	});
 	
