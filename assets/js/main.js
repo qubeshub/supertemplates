@@ -95,6 +95,7 @@ jQuery(document).ready(function(jq) {
 	var $headerId = $(".header-id");
 	var $sidebarWrap = $("#sidebar-wrapper");
 	var $footerWrap = $(".super-group-footer-wrap");
+	var $contentWrap = $(".super-group-content-wrap");
 	var poweredBy = document.getElementsByClassName("poweredby")[0];
 
 	var scrollTop = 0;
@@ -103,8 +104,6 @@ jQuery(document).ready(function(jq) {
 	
 	$(window).scroll(function() {
 		var windowTop = $(this).scrollTop();
-		var footerWindowTop = $footerWrap[0].getBoundingClientRect().top
-		var menuWindowBottom = $menuWrap[0].getBoundingClientRect().bottom
 
 		if (windowTop > scrollTop) {
 			// Down
@@ -143,9 +142,11 @@ jQuery(document).ready(function(jq) {
 
 		// Fix sidebar directly under menu after announcements have scrolled
 		// $sidebarWrap[0].getBoundingClientRect().bottom + parseFloat($sidebarWrap.css("margin-bottom")) < $footerWrap[0].getBoundingClientRect().top)
-		// 
-		var sidebarIsAboveFooter = (((footerWindowTop - menuWindowBottom) - $sidebarWrap.outerHeight(true)) > 0);
-		if (sidebarIsAboveFooter) {
+		if (windowTop > (bannerHeight + $scontainer.height() + $contentWrap.height() - $sidebarWrap.outerHeight())) {
+			$sidebarWrap.removeClass("sidebar-wrapper-scrolled");
+			$sidebarWrap.css("bottom", "-9px");
+			$sidebarWrap.css("top", "");
+		} else {
 			if (windowTop > bannerHeight + $scontainer.height()) {
 				$sidebarWrap.addClass("sidebar-wrapper-scrolled");
 				$sidebarWrap.css("top", "94px");
@@ -154,10 +155,6 @@ jQuery(document).ready(function(jq) {
 				$sidebarWrap.removeClass("sidebar-wrapper-scrolled");
 				$sidebarWrap.css("top", "50px");				
 			}
-		} else {
-			$sidebarWrap.removeClass("sidebar-wrapper-scrolled");
-			$sidebarWrap.css("bottom", "-9px");
-			$sidebarWrap.css("top", "");
 		}
 	});
 	
