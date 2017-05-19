@@ -236,7 +236,7 @@
 	margin: 0;	/* margin-top will be changed by javascript to height of scontainer */
 	font-size: 1.2em;
 	min-height: 300px;
-	padding: 50px 20px 40px 20px !important;	/* Sticky navbar: Top = 50px */
+	padding: 42px 20px 42px 20px !important;
 }
 .super-group-content {
 	margin: 0;
@@ -352,7 +352,7 @@ Also note that utilizing javascript is the only way I know how to move this arou
 automatic element placement by the Hub. */
 .scontainer {
 	position: absolute;
-	margin-top: 40px;	/* Relative to .super-group-menu-wrap - javascript will change this */
+	/* margin-top: 40px; */	/* Relative to .super-group-menu-wrap - javascript will change this */
 	width: 100%;
 }
 
@@ -383,7 +383,7 @@ automatic element placement by the Hub. */
 .super-group-menu-wrap {
 	z-index: 150;
 	box-shadow: 0 2px 3px rgba(0,0,0,0.4);
-	margin-bottom: -40px;
+	/* margin-bottom: -40px; */  /* Set this with javascript, as should be height of menu */
 }
 .super-group-menu-scrolled {
 	position: fixed;	/* Same as .super-group-header-wrap */

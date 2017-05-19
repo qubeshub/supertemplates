@@ -66,21 +66,25 @@ jQuery(document).ready(function(jq) {
 		Enter custom JS code here.
 	*/
 	
-	/* Fix content for sticky group announcements. */
+	/* Fix content for sticky group announcements and respond to resizing of menu. */
 	var $scontainer = $(".scontainer");
-	var $superGroupMenuWrap = $(".super-group-menu-wrap");
-	var $superGroupContentWrap = $(".super-group-content-wrap");
+	var $menuWrap = $(".super-group-menu-wrap");
+	var $contentWrap = $(".super-group-content-wrap");
 
-	$scontainer.css("margin-top", $superGroupMenuWrap.css("height"));
-	$superGroupContentWrap.css("margin-top", $scontainer.css("height"));
+	$scontainer.css("margin-top", $menuWrap.css("height"));
+	$contentWrap.css("margin-top", $scontainer.css("height"));
+  	$menuWrap.css("margin-bottom", -1 * parseFloat($menuWrap.height()) + "px");
+  	$contentWrap.css("padding-top", $menuWrap.height());
 	new ResizeSensor(jQuery('.super-group-menu-wrap'), function() {
-		$scontainer.css("margin-top", $superGroupMenuWrap.css("height"));
-		$superGroupContentWrap.css("margin-top", $scontainer.css("height"));
+		$scontainer.css("margin-top", $menuWrap.css("height"));
+		$contentWrap.css("margin-top", $scontainer.css("height"));
+	  	$menuWrap.css("margin-bottom", -1 * parseFloat($menuWrap.height()) + "px");
+	  	$contentWrap.css("padding-top", $menuWrap.height());
 	});
 	
-	/* Readjust content after closing announcement */
+	/* Smoothly readjust content after closing of announcements */
 	$('.announcement .close').on('click', function() {
-		$superGroupContentWrap.animate({marginTop: '-=' + $(this).parent().parent().outerHeight() + 'px'});
+		$contentWrap.animate({marginTop: '-=' + $(this).parent().parent().outerHeight() + 'px'});
 	});
   	
 	/* Sticky navbar */
@@ -91,17 +95,15 @@ jQuery(document).ready(function(jq) {
 	// in the file /www/dev/core/components/com_users/site/assets/js/login.js
 	// to get it to work.
 	
-	var $menuWrap = $(".super-group-menu-wrap");
 	var $headerId = $(".header-id");
 	var $sidebarWrap = $("#sidebar-wrapper");
 	var $footerWrap = $(".super-group-footer-wrap");
-	var $contentWrap = $(".super-group-content-wrap");
 	var poweredBy = document.getElementsByClassName("poweredby")[0];
 
 	var scrollTop = 0;
 	var bannerHeight = $(".super-group-header-overlay").height();
 	var barHeight = $(".super-group-bar").height();
-	
+
 	$(window).scroll(function() {
 		var windowTop = $(this).scrollTop();
 
@@ -140,22 +142,22 @@ jQuery(document).ready(function(jq) {
 			$menuWrap.removeClass("super-group-menu-scrolled");
 		}
 
+		// Negative padding on $menuWrap is a headache!
 		// Fix sidebar directly under menu after announcements
-		if (windowTop > bannerHeight + $scontainer.height()) {
-			$sidebarWrap.addClass("sidebar-wrapper-scrolled");
-			$sidebarWrap.css("top", "94px");
-			$sidebarWrap.css("bottom", "");
+		if (windowTop < bannerHeight + $scontainer.height()) {
+			$sidebarWrap.removeClass("sidebar-wrapper-scrolled");
+			$sidebarWrap.css("top", $menuWrap.height());				
 		} else {
-			$sidebarWrap.removeClass("sidebar-wrapper-scrolled");
-			$sidebarWrap.css("top", "50px");				
-		}
+			$sidebarWrap.addClass("sidebar-wrapper-scrolled");
+			$sidebarWrap.css("top", barHeight + $menuWrap.height() + "px");
+			$sidebarWrap.css("bottom", "");
 
-		// Put sidebar at bottom when footer starts to encroach and scroll with page
-		// $sidebarWrap[0].getBoundingClientRect().bottom + parseFloat($sidebarWrap.css("margin-bottom")) < $footerWrap[0].getBoundingClientRect().top)
-		if (windowTop > (bannerHeight + $scontainer.height() + $contentWrap.height() - $sidebarWrap.outerHeight())) {
-			$sidebarWrap.removeClass("sidebar-wrapper-scrolled");
-			$sidebarWrap.css("bottom", "-9px");
-			$sidebarWrap.css("top", "");
+			// Put sidebar at bottom when footer starts to encroach and scroll with page
+			if (windowTop > (bannerHeight + $menuWrap.height() + $scontainer.height() + $contentWrap.height() - $sidebarWrap.outerHeight(true))) {
+				$sidebarWrap.removeClass("sidebar-wrapper-scrolled");
+				$sidebarWrap.css("bottom", "0px");
+				$sidebarWrap.css("top", "");
+			}
 		}
 	});
 	
