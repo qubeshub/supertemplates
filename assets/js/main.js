@@ -109,10 +109,6 @@ jQuery(document).ready(function(jq) {
 	var startBarFade = 0;
 	pushingDown = pushingUp = false;
 
-	// Possible problem here - changing window size won't update this - fix later.
-	var thresh = $sidebarWrap.offset().top + $sidebarWrap.outerHeight(true) - $(window).height();
-	console.log("Threshold = " + thresh);
-
 	$(window).scroll(function() {
 		windowTop = $(this).scrollTop();
 
@@ -174,7 +170,7 @@ jQuery(document).ready(function(jq) {
 			} else {
 				if ((!scrollingDown) && ($sidebarWrap.hasClass("sidebar-wrapper-fixed-bottom"))) {
 					$sidebarWrap.removeClass("sidebar-wrapper-fixed-bottom");
-					$sidebarWrap.css("top", (41 - 13 + windowTop - (thresh)) + "px");
+					$sidebarWrap.css("top", 44 - $sidebarWrap.outerHeight(true) + $(this).height() - 85 - 25 + windowTop + parseFloat($contentWrap.css("padding-top")) - $contentWrap.offset().top + "px");
 				}
 			}
 
@@ -187,8 +183,7 @@ jQuery(document).ready(function(jq) {
 			} else {
 				if ((scrollingDown) && ($sidebarWrap.hasClass("sidebar-wrapper-fixed-top"))) {
 					$sidebarWrap.removeClass("sidebar-wrapper-fixed-top");
-					// I think this is the proper way - replace bottom one above with a variant of this.
-					$sidebarWrap.css("top", 42 + windowTop - $contentWrap.offset().top + parseFloat($contentWrap.css("padding-top")) + "px");					
+					$sidebarWrap.css("top", 42 + windowTop + parseFloat($contentWrap.css("padding-top")) - $contentWrap.offset().top + "px");					
 				}
 			}
 
