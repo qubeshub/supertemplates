@@ -27,10 +27,16 @@
     transition: width 0.5s ease;
 }
 
-.sidebar-wrapper-scrolled {
+.sidebar-wrapper-fixed-top {
     position: fixed !important;
-    /* top: 94px; */
+    top: 85px;
 }
+
+.sidebar-wrapper-fixed-bottom {
+    position: fixed !important;
+    bottom: 25px;   /* Set to margin-bottom of sidebar-wrapper */
+}
+
 
 #sidebar-wrapper:hover {
   width: 250px;
