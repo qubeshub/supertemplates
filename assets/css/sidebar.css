@@ -27,14 +27,22 @@
     transition: width 0.5s ease;
 }
 
+/* Need the !important on the initial arguments, but not sure about everything else */
 .sidebar-wrapper-fixed-top {
     position: fixed !important;
-    top: 85px;
+    top: 85px !important;
+    bottom: initial !important;
 }
 
 .sidebar-wrapper-fixed-bottom {
     position: fixed !important;
-    bottom: 25px;   /* Set to margin-bottom of sidebar-wrapper */
+    top: initial !important;
+    bottom: 25px !important;   /* Set to margin-bottom of sidebar-wrapper */
+}
+
+.sidebar-wrapper-footer {
+    top: initial !important;
+    bottom: 0px !important;
 }
 
 

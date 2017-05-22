@@ -19,7 +19,7 @@ function initMenu() {
 // Make sure content area is at least as large as sidebar, plus wiggle room
 function adjustContentBody() {
 	$('.super-group-content-wrap').css("min-height", function() {
-		return $('#sidebar-wrapper').height()+30;
+		return $('#sidebar-wrapper').outerHeight(true);
 	});
 }
 

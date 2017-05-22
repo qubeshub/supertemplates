@@ -70,6 +70,10 @@ jQuery(document).ready(function(jq) {
 	var $scontainer = $(".scontainer");
 	var $menuWrap = $(".super-group-menu-wrap");
 	var $contentWrap = $(".super-group-content-wrap");
+	var $sidebarWrap = $("#sidebar-wrapper");
+
+	// Make sure content is at least as large as sidebar size.
+	$contentWrap.css("min-height", $sidebarWrap.outerHeight(true) + "px");
 
 	$scontainer.css("margin-top", $menuWrap.css("height"));
 	$contentWrap.css("margin-top", $scontainer.css("height"));
@@ -96,7 +100,6 @@ jQuery(document).ready(function(jq) {
 	// to get it to work.
 	
 	var $headerId = $(".header-id");
-	var $sidebarWrap = $("#sidebar-wrapper");
 	var $footerWrap = $(".super-group-footer-wrap");
 	var poweredBy = document.getElementsByClassName("poweredby")[0];
 
@@ -104,12 +107,12 @@ jQuery(document).ready(function(jq) {
 	var bannerHeight = $(".super-group-header-overlay").height();
 	var barHeight = $(".super-group-bar").height();
 
-	var scrollingDir = "";
 	var windowTop = 0;
 	var startBarFade = 0;
+	var pushAndPullSidebar = false;
 	pushingDown = pushingUp = false;
-
-	$(window).scroll(function() {
+	
+	$(window).on("resize scroll", function() {
 		windowTop = $(this).scrollTop();
 
 		if (windowTop > scrollTop) {
@@ -148,51 +151,47 @@ jQuery(document).ready(function(jq) {
 		// Negative padding on $menuWrap is a headache!
 		// Fix sidebar directly under menu after announcements
 		if (windowTop < bannerHeight + $scontainer.height()) {
-			$sidebarWrap.removeClass("sidebar-wrapper-fixed-top");
-			$sidebarWrap.css("bottom", "");
-			// $sidebarWrap.css("top", $menuWrap.height());				
+			$sidebarWrap.css("top","");
+			$sidebarWrap.removeClass();
 		} else {
-			// $sidebarWrap.addClass("sidebar-wrapper-scrolled");
-			// $sidebarWrap.css("top", barHeight + $menuWrap.height() + "px");
-			// $sidebarWrap.css("bottom", "");
+			pushAndPullSidebar = ($sidebarWrap.outerHeight(true) > ((windowTop + $(window).height()) - ($menuWrap.offset().top + $menuWrap.height())));
 
-			pushingUp = !scrollingDown && (($sidebarWrap.offset().top + 1) > 
-				(parseFloat($sidebarWrap.css("margin-top")) + $menuWrap.offset().top + $menuWrap.height()));
-			pushingDown = scrollingDown && (($sidebarWrap.offset().top + $sidebarWrap.outerHeight(true) - 1) < 
-				(windowTop + $(this).height()))
-
-			console.log("Pushing Down: " + pushingDown);
-			if (pushingDown) {
-				if (scrollingDown) {
-					$sidebarWrap.css("top","");
-					$sidebarWrap.addClass("sidebar-wrapper-fixed-bottom");
-				}
+			if (!pushAndPullSidebar) {
+				$sidebarWrap.removeClass("sidebar-wrapper-fixed-bottom sidebar-wrapper-footer").addClass("sidebar-wrapper-fixed-top");
 			} else {
-				if ((!scrollingDown) && ($sidebarWrap.hasClass("sidebar-wrapper-fixed-bottom"))) {
-					$sidebarWrap.removeClass("sidebar-wrapper-fixed-bottom");
-					$sidebarWrap.css("top", 44 - $sidebarWrap.outerHeight(true) + $(this).height() - 85 - 25 + windowTop + parseFloat($contentWrap.css("padding-top")) - $contentWrap.offset().top + "px");
-				}
-			}
+				pushingUp = !scrollingDown && (($sidebarWrap.offset().top + 1) > 
+					(parseFloat($sidebarWrap.css("margin-top")) + $menuWrap.offset().top + $menuWrap.height()));
+				pushingDown = scrollingDown && (($sidebarWrap.offset().top + $sidebarWrap.outerHeight(true) - 1) < 
+					(windowTop + $(this).height()))
 
-			if (pushingUp) {
-				if (!scrollingDown) {
-					$sidebarWrap.css("top","");
-					$sidebarWrap.css("bottom","");
-					$sidebarWrap.addClass("sidebar-wrapper-fixed-top");
+				if (pushingDown) {
+					if (scrollingDown) {
+						$sidebarWrap.removeClass("sidebar-wrapper-fixed-top sidebar-wrapper-footer").addClass("sidebar-wrapper-fixed-bottom");
+					}
+				} else {
+					if ((!scrollingDown) && ($sidebarWrap.hasClass("sidebar-wrapper-fixed-bottom"))) {
+						$sidebarWrap.removeClass();
+						$sidebarWrap.css("top", 44 - $sidebarWrap.outerHeight(true) + $(this).height() - 85 - 25 + windowTop + parseFloat($contentWrap.css("padding-top")) - $contentWrap.offset().top + "px");
+					}
 				}
-			} else {
-				if ((scrollingDown) && ($sidebarWrap.hasClass("sidebar-wrapper-fixed-top"))) {
-					$sidebarWrap.removeClass("sidebar-wrapper-fixed-top");
-					$sidebarWrap.css("top", 42 + windowTop + parseFloat($contentWrap.css("padding-top")) - $contentWrap.offset().top + "px");					
+
+				if (pushingUp) {
+					if (!scrollingDown) {
+						$sidebarWrap.removeClass("sidebar-wrapper-fixed-bottom sidebar-wrapper-footer").addClass("sidebar-wrapper-fixed-top");
+					}
+				} else {
+					if ((scrollingDown) && ($sidebarWrap.hasClass("sidebar-wrapper-fixed-top"))) {
+						$sidebarWrap.removeClass();
+						$sidebarWrap.css("top", 42 + windowTop + parseFloat($contentWrap.css("padding-top")) - $contentWrap.offset().top + "px");					
+					}
 				}
 			}
 
 			// Put sidebar at bottom when footer starts to encroach and scroll with page
-			// if (windowTop > (bannerHeight + $menuWrap.height() + $scontainer.height() + $contentWrap.height() - $sidebarWrap.outerHeight(true))) { //
-			if (windowTop + $(this).height() > $footerWrap.offset().top + 41 - 13) {
-				$sidebarWrap.removeClass("sidebar-wrapper-fixed-bottom");
-				$sidebarWrap.css("bottom", "0px");
-				$sidebarWrap.css("top", "");
+			if ((pushAndPullSidebar && (windowTop + $(this).height() > $footerWrap.offset().top + 41 - 13)) ||
+			   (!pushAndPullSidebar && ($sidebarWrap.offset().top + $sidebarWrap.height() + parseFloat($sidebarWrap.css("margin-bottom")) > $footerWrap.offset().top))) {
+				$sidebarWrap.removeClass();
+				$sidebarWrap.addClass("sidebar-wrapper-footer");
 			}
 		}
 	});
