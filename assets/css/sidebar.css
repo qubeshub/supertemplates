@@ -135,10 +135,6 @@
 .sidebar-nav li a:before,
 .sidebar-nav li span:before {
     content: attr(data-icon);
-}
-
-.sidebar-nav li a:before,
-.sidebar-nav li span:before {
     vertical-align: middle;
     display: inline-block;
     margin-left: -0.7em;
@@ -170,14 +166,31 @@
 #page-menu li .meta {
     position: absolute;
     right: 0.5em;
-    margin-top: -2.4em;
+    margin-top: -2.85em;
     padding: 0;
+}
+
+#page-menu li span.count {
+    display: inline-block;
+    text-align: center;
+}
+
+#page-menu li span.count:before {
+    margin: 0;
+    width: 0em;
+    left: 0.5em;
+}
+
+#page-menu li span.count:after {
+    top: inherit;
+    width: 0em;
+    left: 0.1em;
 }
 
 #page-menu li .meta .count {
     background: rgba(200, 0, 0, 0.5);
     font-size: 0.9em;
     line-height: 1.2;
-    padding: 0em 1.2em 0.5em 0em;
+    padding: 0em 1.2em 0.2em 0em;
     border-radius: 1em;
 }
