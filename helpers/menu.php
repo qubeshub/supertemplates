@@ -136,11 +136,6 @@ if (count($pages) > 0)
 	$menupages = array_filter($menupages, function($page) use ($pageids) {
 		return in_array($page->get('id'), $pageids);
 	});
-	// Gets the active page/tab and stores in trueTab
-	//   This seems to give the same answer as $this->tab???
-	//	 Not sure why this is necessary.
-	$trueTab = strtolower(Request::getVar('active', 'overview'));
-	$liClass = ($trueTab != $this->tab) ? '' : $liClass;
 
 	// append pages html
 	// only pass in the children of the root node
