@@ -24,12 +24,21 @@ $pages = $pageArchive->pages('tree', array(
 ), true);
 
 // Rather than rewrite this code, gonna do some string magic.
-$something = View::displaySections($this->group, 'class="cf"');
-$pos1 = strpos($something, 'group-overview-tab');	// Find overview-tab
-$pos2 = strpos($something, 'group-', $pos1 + strlen('group-overview-tab')); // Find next group area
-$fred = substr($something, 0, $pos2); // Consider string up to that point
-$pos3 = strrpos($fred, "<li class=");	// Search backwards for beginning of list item
-$community = substr($something, $pos3);	// Cut off string up to this point
+$menu = View::displaySections($this->group, 'class="cf"');
+
+// Get position for beginning of list of pages
+$menu = str_replace(">Overview</a>",">Main</a>",$menu);
+$start = strpos($menu, ">Main</a>") + strlen(">Main</a>"); // Beginning of list of pages
+
+$fred = strpos($menu, 'group-', $start);
+
+// Get position for end of list of pages
+$end = strrpos(substr($menu,0,$fred), "<li class="); // Find next group area
+
+// Creates menu of pages in $replacement variable
+include_once dirname(__DIR__) . DS . 'helpers' . DS . 'menu.php';
+
+$menu = substr_replace($menu, $replacement, $start, $end-$start);
 
 // Grab logo
 if ($this->group->get('logo') == NULL) {
@@ -60,7 +69,7 @@ if ($this->group->get('logo') == NULL) {
 <div class="super-group-menu-wrap">
 	<div class="super-group-menu">
 		<!-- ###  Start Menu Include  ### -->
-		<?php include_once dirname(__DIR__) . DS . 'helpers' . DS . 'menu.php'; ?>
+		<?php echo $menu ?>
 		<!-- ###  End Menu Include  ### -->
 	</div>
 </div>

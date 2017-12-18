@@ -140,8 +140,6 @@ if (count($pages) > 0)
 	// append pages html
 	// only pass in the children of the root node
 	// basically skip the overview page here
-	$item = View::buildRecursivePageMenu($this->group, $menupages, $pageids);
-	
-	echo $item;
+	$replacement = View::buildRecursivePageMenu($this->group, $menupages, $pageids);
 }
 ?>
