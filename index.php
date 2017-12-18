@@ -43,6 +43,20 @@ Document::addScript($base . DS . 'assets/js/ElementQueries.js');
 </style>
 <!-- end: modify css for banner image -->
 
+<!-- begin: modify favicon if in upload folder -->
+<?php
+if (file_exists(PATH_ROOT . $uploads . DS . "favicon.ico")):
+	$favicon = $uploads . DS . "favicon.ico";
+else:
+	$favicon = "/app/templates/qubes/favicon.ico";
+endif;
+?>
+
+<script>
+$("[rel='shortcut icon']")[0].setAttribute('href', "<?php echo $favicon; ?>");
+</script>
+<!-- end: modify favicon if in upload folder -->
+
 <?php if (!$no_html) : ?>
 <group:include type="content" scope="before" />
 
