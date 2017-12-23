@@ -27,6 +27,10 @@
     transition: width 0.5s ease;
 }
 
+#sidebar-wrapper > ul li .alrt {
+    display: none;
+}
+
 /* Need the !important on the initial arguments, but not sure about everything else */
 .sidebar-wrapper-fixed-top {
     position: fixed !important;
