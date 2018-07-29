@@ -2,8 +2,8 @@
 //
 //	Developers:
 //
-//	Please Be Mindful of javascript library being used within
-//	hub (if any). Use no conflict mode to avoid library
+//	Please Be Mindful of javascript library being used within 
+//	hub (if any). Use no conflict mode to avoid library 
 //	compatibility. Native JS is always allowed.
 //
 /////////////////////////////////////////////////////////////////
@@ -65,7 +65,7 @@ jQuery(document).ready(function(jq) {
 	/*
 		Enter custom JS code here.
 	*/
-
+	
 	/* Fix content for sticky group announcements and respond to resizing of menu. */
 	var $scontainer = $(".scontainer");
 	var $menuWrap = $(".super-group-menu-wrap");
@@ -85,20 +85,20 @@ jQuery(document).ready(function(jq) {
 	  	$menuWrap.css("margin-bottom", -1 * parseFloat($menuWrap.height()) + "px");
 	  	$contentWrap.css("padding-top", $menuWrap.height());
 	});
-
+	
 	/* Smoothly readjust content after closing of announcements */
 	$('.announcement .close').on('click', function() {
 		$contentWrap.animate({marginTop: '-=' + $(this).parent().parent().outerHeight() + 'px'});
 	});
-
+  	
 	/* Sticky navbar */
 	/* https://teamtreehouse.com/community/forum-tip-create-a-sticky-navigation-with-css-and-jquery-2 */
 	//
-	// Bug in login - had to comment out the following line
+	// Bug in login - had to comment out the following line 
 	//		$('#username, #password').placeholder();
 	// in the file /www/dev/core/components/com_users/site/assets/js/login.js
 	// to get it to work.
-
+	
 	var $headerId = $(".header-id");
 	var $footerWrap = $(".super-group-footer-wrap");
 	var poweredBy = document.getElementsByClassName("poweredby")[0];
@@ -111,7 +111,7 @@ jQuery(document).ready(function(jq) {
 	var startBarFade = 0;
 	var pushAndPullSidebar = false;
 	pushingDown = pushingUp = false;
-
+	
 	$(window).on("resize scroll", function() {
 		windowTop = $(this).scrollTop();
 
@@ -140,7 +140,7 @@ jQuery(document).ready(function(jq) {
 		} else {
 			$headerId.removeClass("header-id-scrolled");
 		}
-
+		
 		// Fix menu directly under QUBES navbar
 		if (windowTop > bannerHeight) {
 			$menuWrap.addClass("super-group-menu-scrolled");
@@ -159,9 +159,9 @@ jQuery(document).ready(function(jq) {
 			if (!pushAndPullSidebar) {
 				$sidebarWrap.removeClass("sidebar-wrapper-fixed-bottom sidebar-wrapper-footer").addClass("sidebar-wrapper-fixed-top");
 			} else {
-				pushingUp = !scrollingDown && (($sidebarWrap.offset().top + 1) >
+				pushingUp = !scrollingDown && (($sidebarWrap.offset().top + 1) > 
 					(parseFloat($sidebarWrap.css("margin-top")) + $menuWrap.offset().top + $menuWrap.height()));
-				pushingDown = scrollingDown && (($sidebarWrap.offset().top + $sidebarWrap.outerHeight(true) - 1) <
+				pushingDown = scrollingDown && (($sidebarWrap.offset().top + $sidebarWrap.outerHeight(true) - 1) < 
 					(windowTop + $(this).height()))
 
 				if (pushingDown) {
@@ -182,7 +182,7 @@ jQuery(document).ready(function(jq) {
 				} else {
 					if ((scrollingDown) && ($sidebarWrap.hasClass("sidebar-wrapper-fixed-top"))) {
 						$sidebarWrap.removeClass();
-						$sidebarWrap.css("top", 42 + windowTop + parseFloat($contentWrap.css("padding-top")) - $contentWrap.offset().top + "px");
+						$sidebarWrap.css("top", 42 + windowTop + parseFloat($contentWrap.css("padding-top")) - $contentWrap.offset().top + "px");					
 					}
 				}
 			}
@@ -195,76 +195,5 @@ jQuery(document).ready(function(jq) {
 			}
 		}
 	});
-
-	// Modified Greedy Nav (Priority+ navigation) - lukejacksonn
-	// https://codepen.io/lukejacksonn/pen/PwmwWV
-
-	// Add class to the main navigation and remove the select dropdown
-	$('.super-group-menu > ul.cf.js').addClass('visible-links');
-	$('.visible-links .option-select').remove();
-	$('.hidden-links .option-select').remove();
-
-	var $nav = $('.super-group-menu');
-	var $btn = $('.super-group-menu button');
-	var $vlinks = $('.super-group-menu .visible-links');
-	var $hlinks = $('.super-group-menu .hidden-links');
-	var breaks = [];
-
-	function updateNav() {
-
-		var availableSpace = $btn.hasClass('hidden') ? $nav.width() : $nav.width() - $btn.width() - 30;
-
-			// The visible list is overflowing the nav
-			if ($vlinks.width() > availableSpace) {
-
-				// Record the width of the list
-				breaks.push($vlinks.width());
-
-				//Move item to the hidden list
-				$vlinks.children().last().prependTo($hlinks);
-
-
-				//Show the dropdown btn
-				if ($btn.hasClass('hidden')) {
-					$btn.removeClass('hidden');
-				}
-
-			// The visible list is not overflowing
-			} else {
-
-				//There is space for another item in the nav
-				if (availableSpace > breaks[breaks.length-1]) {
-
-					// Move the item to the visible list
-					$hlinks.children().first().appendTo($vlinks);
-					breaks.pop();
-				}
-
-				// Hide the dropdown btn if hidden list is empty
-				if (breaks.length < 1) {
-					$btn.addClass('hidden');
-					$hlinks.addClass('hidden');
-				}
-			}
-
-		// Keep counter updated
-		$btn.attr("count", breaks.length);
-
-		//Recur if the visibile list is still overflowing the nav
-		if ($vlinks.width() > availableSpace) {
-			updateNav();
-		}
-	}
-
-	// Window listeners
-	$(window).resize(function() {
-		updateNav();
-	});
-
-	$btn.click(function() {
-		$hlinks.toggleClass('hidden');
-	});
-
-	updateNav();
-
+	
 });
