@@ -137,6 +137,7 @@ jQuery(document).ready(function(jq) {
 		// Replace "poweredby QUBES" with group logo and title
 		if (windowTop > bannerHeight - (barHeight/2)) {
 			$headerId.addClass("header-id-scrolled");
+
 		} else {
 			$headerId.removeClass("header-id-scrolled");
 		}
@@ -196,6 +197,28 @@ jQuery(document).ready(function(jq) {
 		}
 	});
 
+	// Debounce function: https://davidwalsh.name/javascript-debounce-function
+	// Returns a function, that, as long as it continues to be invoked, will not
+	// be triggered. The function will be called after it stops being called for
+	// N milliseconds. If `immediate` is passed, trigger the function on the
+	// leading edge, instead of the trailing.
+
+	function debounce(func, wait, immediate) {
+		var timeout;
+		return function() {
+			var context = this, args = arguments;
+			var later = function() {
+				timeout = null;
+				if (!immediate) func.apply(context, args);
+			};
+			var callNow = immediate && !timeout;
+			clearTimeout(timeout);
+			timeout = setTimeout(later, wait);
+			if (callNow) func.apply(context, args);
+		};
+	};
+
+
 	// Modified Greedy Nav (Priority+ navigation) - lukejacksonn
 	// https://codepen.io/lukejacksonn/pen/PwmwWV
 
@@ -208,12 +231,17 @@ jQuery(document).ready(function(jq) {
 	var $btn = $('.super-group-menu button');
 	var $vlinks = $('.super-group-menu .visible-links');
 	var $hlinks = $('.super-group-menu .hidden-links');
+	var $alinks = $vlinks.children(); + $hlinks.children();
 	var breaks = [];
 
 	function updateNav() {
 
 		var availableSpace = $btn.hasClass('hidden') ? $nav.width() : $nav.width() - $btn.width() - 30;
-
+		// console.log(availableSpace);
+		// console.log('link width is ' + $vlinks.width());
+		// console.log(document.readyState);
+		// console.log('Visible link children is ' + $vlinks.children().length);
+		// console.log('All links is ' + $alinks.length);
 			// The visible list is overflowing the nav
 			if ($vlinks.width() > availableSpace) {
 
@@ -250,21 +278,36 @@ jQuery(document).ready(function(jq) {
 		// Keep counter updated
 		$btn.attr("count", breaks.length);
 
-		//Recur if the visibile list is still overflowing the nav
+		// Recur if the visibile list is still overflowing the nav
 		if ($vlinks.width() > availableSpace) {
 			updateNav();
 		}
+
+		// Rerun function if visible links < total links
+		if ($vlinks.children().length < $alinks.length) {
+			timer = setTimeout(updateNav, 1000);
+		}
 	}
+	updateNav();
 
 	// Window listeners
-	$(window).resize(function() {
+	var priorityNav = debounce(function() {
+
 		updateNav();
-	});
+
+	}, 100);
+
+	$(window).on('resize', priorityNav);
 
 	$btn.click(function() {
 		$hlinks.toggleClass('hidden');
 	});
 
-	updateNav();
+	// Close hidden list when clicking somewhere else
+  $('body').click(function(e) {
+    if($(e.target).closest('.super-group-menu').length === 0) {
+      $hlinks.addClass('hidden');
+    }
+  });
 
 });

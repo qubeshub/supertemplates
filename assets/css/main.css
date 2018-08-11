@@ -456,6 +456,7 @@ automatic element placement by the Hub. */
 	background-color: #628a2c;
 	color: #fff;
 	cursor: pointer;
+	transition: 0.1s ease-in-out;
 }
 .super-group-menu button:hover {
 	background-color: rgba(0,0,0,0.15);
@@ -470,14 +471,11 @@ automatic element placement by the Hub. */
 	text-align: center;
 	background-color: #628a2c;
 	color: #fff;
-	font-size: 0.875em;
-	line-height: 1.75em;
+	font-size: 0.7rem;
+	line-height: 1.5rem;
 	border-radius: 50%;
 	border: 3px solid #fff;
 	font-weight: bold;
-}
-.super-group-menu button:hover::after {
-	transform: scale(1.075);
 }
 .super-group-menu .hamburger {
 	position: relative;
@@ -524,7 +522,33 @@ automatic element placement by the Hub. */
 	visibility: hidden;
 }
 
-
+/* Responsiveness */
+@media (min-width: 340px) and (max-width: 520px) {
+	.super-group-bar .content {
+		position: relative;
+	}
+	.super-group-bar .content .branding {
+    float: left;
+	}
+	.super-group-bar .content .subnav {
+		position: absolute;
+		right: 0;
+	}
+	.super-group-bar .content .branding .poweredby {
+		display: inline-block;
+	}
+	.super-group-bar .content .subnav > li > a {
+		line-height: 0;
+	}
+	.super-group-bar .content .subnav > li > a.icon.user-account-link:before {
+		line-height: 0;
+	}
+}
+@media (min-width: 340px) and (max-width: 640px) {
+	.header-id {
+		z-index: 1001 !important;
+	}
+}
 
 /* @media (min-width: 40em) {
 	.super-group-menu>ul.js li {
