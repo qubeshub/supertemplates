@@ -310,4 +310,35 @@ jQuery(document).ready(function(jq) {
     }
   });
 
+	// Sidebar responsiveness
+
+	function menuResponsive() {
+
+		// Media querie triggered and sidebar is fixed to the bottom
+		if ($('#sidebar-wrapper').css('position') == 'fixed') {
+
+			// Move remaining links to the more menu
+			$('.sidebar-nav > li:nth-child(5)').nextAll().prependTo('.more-links');
+
+		// No longer mobile width
+		} else {
+
+				// Move all links back to sidebar and remove classes
+			$('.more-links').children().appendTo('.sidebar-nav');
+			$('.sidebar-nav').removeClass('more-menu-expanded');
+			$('.more-links').removeClass('links-visible');
+		}
+	}
+
+	$('.more-menu').on('click', function() {
+		$('#sidebar-wrapper').toggleClass('fullscreen');
+		$('.sidebar-nav').toggleClass('more-menu-expanded');
+		$('.more-links').toggleClass('links-visible');
+	});
+	menuResponsive();
+
+ $(window).on('resize', function() {
+	 menuResponsive();
+ });
+
 });

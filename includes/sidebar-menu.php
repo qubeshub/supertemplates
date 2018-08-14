@@ -21,5 +21,7 @@ $community = substr($something, $pos3);	// Cut off string up to this point
 ?>
 
 <ul class="sidebar-nav nav-pills nav-stacked js" id="page-menu">
+  <button class="more-menu"></button> // Add hamburger for mobile
 <?php echo $community; ?>
+  <ul class="more-links"></ul> // Add overflow menu for mobile
 </ul>
