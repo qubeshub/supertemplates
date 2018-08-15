@@ -71,6 +71,9 @@ jQuery(document).ready(function(jq) {
 	var $menuWrap = $(".super-group-menu-wrap");
 	var $contentWrap = $(".super-group-content-wrap");
 	var $sidebarWrap = $("#sidebar-wrapper");
+	var $moreMenu = $('.more-menu');
+	var $sidebarNav = $('.sidebar-nav');
+	var $moreLinks = $('.more-links');
 
 	// Make sure content is at least as large as sidebar size.
 	$contentWrap.css("min-height", $sidebarWrap.outerHeight(true) + "px");
@@ -157,7 +160,7 @@ jQuery(document).ready(function(jq) {
 		} else {
 			pushAndPullSidebar = ($sidebarWrap.outerHeight(true) > ((windowTop + $(window).height()) - ($menuWrap.offset().top + $menuWrap.height())));
 
-			if (!pushAndPullSidebar) {
+			if ((!pushAndPullSidebar) && ($sidebarWrap.css('position') !== 'fixed')) {
 				$sidebarWrap.removeClass("sidebar-wrapper-fixed-bottom sidebar-wrapper-footer").addClass("sidebar-wrapper-fixed-top");
 			} else {
 				pushingUp = !scrollingDown && (($sidebarWrap.offset().top + 1) >
@@ -166,7 +169,7 @@ jQuery(document).ready(function(jq) {
 					(windowTop + $(this).height()))
 
 				if (pushingDown) {
-					if (scrollingDown) {
+					if ((scrollingDown) && ($sidebarWrap.css('position') !== 'fixed')) {
 						$sidebarWrap.removeClass("sidebar-wrapper-fixed-top sidebar-wrapper-footer").addClass("sidebar-wrapper-fixed-bottom");
 					}
 				} else {
@@ -177,7 +180,7 @@ jQuery(document).ready(function(jq) {
 				}
 
 				if (pushingUp) {
-					if (!scrollingDown) {
+					if ((!scrollingDown && ($sidebarWrap.css('position') !== 'fixed'))) {
 						$sidebarWrap.removeClass("sidebar-wrapper-fixed-bottom sidebar-wrapper-footer").addClass("sidebar-wrapper-fixed-top");
 					}
 				} else {
@@ -194,6 +197,50 @@ jQuery(document).ready(function(jq) {
 				$sidebarWrap.removeClass();
 				$sidebarWrap.addClass("sidebar-wrapper-footer");
 			}
+			if (($sidebarWrap.css('position') == 'fixed')) {
+				$sidebarWrap.removeClass('sidebar-wrapper-footer');
+			}
+		}
+
+		// Sidebar responsiveness
+		// Media query triggered and window is mobile width
+		if ($sidebarWrap.css('position') == 'fixed') {
+
+			// Move remaining links to the more menu
+			$('.sidebar-nav > li:nth-child(5)').nextAll().prependTo('.more-links');
+
+		// Not mobile width
+		} else {
+			if ($moreLinks.children().length > 0) {
+				$moreLinks.children().appendTo($sidebarNav);
+			}
+			if ($sidebarNav.hasClass('more-menu-expanded')) {
+				$sidebarNav.removeClass('more-menu-expanded');
+			}
+		}
+		if ($sidebarWrap.hasClass('sidebar-wrapper-fixed-top') && ($moreLinks.children().length > 0)) {
+			$moreLinks.children().appendTo($sidebarNav);
+		}
+		if ($moreLinks.hasClass('links-visible') && (($sidebarWrap.css('position') !== 'fixed') || $sidebarWrap.hasClass('sidebar-wrapper-fixed-top'))) {
+			$moreLinks.removeClass('links-visile');
+			$sidebarNav.removeClass('more-menu-expanded');
+			$('body, html').removeClass('no-scroll');
+			console.log('detected');
+		}
+
+	});
+
+	// Mobile menu button
+	$moreMenu.on('click', function() {
+		$moreLinks.toggleClass('links-visible');
+		if ($moreLinks.hasClass('links-visible')) {
+			$sidebarWrap.addClass('fullscreen');
+			$sidebarNav.addClass('more-menu-expanded');
+			$('body, html').addClass('no-scroll');
+		} else {
+			$sidebarWrap.removeClass('fullscreen');
+			$sidebarNav.removeClass('more-menu-expanded');
+			$('body, html').removeClass('no-scroll');
 		}
 	});
 
@@ -237,9 +284,6 @@ jQuery(document).ready(function(jq) {
 	function updateNav() {
 
 		var availableSpace = $btn.hasClass('hidden') ? $nav.width() : $nav.width() - $btn.width() - 30;
-		// console.log(availableSpace);
-		// console.log('link width is ' + $vlinks.width());
-		// console.log(document.readyState);
 		// console.log('Visible link children is ' + $vlinks.children().length);
 		// console.log('All links is ' + $alinks.length);
 			// The visible list is overflowing the nav
@@ -309,36 +353,5 @@ jQuery(document).ready(function(jq) {
       $hlinks.addClass('hidden');
     }
   });
-
-	// Sidebar responsiveness
-
-	function menuResponsive() {
-
-		// Media querie triggered and sidebar is fixed to the bottom
-		if ($('#sidebar-wrapper').css('position') == 'fixed') {
-
-			// Move remaining links to the more menu
-			$('.sidebar-nav > li:nth-child(5)').nextAll().prependTo('.more-links');
-
-		// No longer mobile width
-		} else {
-
-				// Move all links back to sidebar and remove classes
-			$('.more-links').children().appendTo('.sidebar-nav');
-			$('.sidebar-nav').removeClass('more-menu-expanded');
-			$('.more-links').removeClass('links-visible');
-		}
-	}
-
-	$('.more-menu').on('click', function() {
-		$('#sidebar-wrapper').toggleClass('fullscreen');
-		$('.sidebar-nav').toggleClass('more-menu-expanded');
-		$('.more-links').toggleClass('links-visible');
-	});
-	menuResponsive();
-
- $(window).on('resize', function() {
-	 menuResponsive();
- });
 
 });

@@ -264,14 +264,18 @@
   bottom: 0;
   left: 0;
 }
+.no-scroll {
+  overflow: hidden
+ }
 @media (min-width: 320px) and (max-width: 480px) {
   .more-menu {
     display: block;
   }
 	#sidebar-wrapper {
-    position: fixed;
-    bottom: 0;
+    position: fixed !important;
+    bottom: 0 !important;
     left: 0;
+    top: initial !important;
     margin: 0;
     width: 100%;
   }
@@ -317,6 +321,14 @@
     font-size: .7em;
     line-height: .7;
   }
-
-
+}
+@media (min-width: 360px) and (max-width: 375px) {
+  .sidebar-nav li {
+    width: 70px;
+  }
+}
+@media (min-width: 320px) and (max-width: 359px) {
+  .sidebar-nav li {
+    width: 60px;
+  }
 }
