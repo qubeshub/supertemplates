@@ -550,11 +550,17 @@ automatic element placement by the Hub. */
 	}
 }
 
-/* @media (min-width: 40em) {
-	.super-group-menu>ul.js li {
-		display: block;
+@media (min-width: 320px) and (max-width: 339px) {
+.super-group-bar .content {
+	display: flex;
+	height: 100%;
+}
+	.super-group-bar .content .subnav {
+		display: flex;
+		height: 100%;
+		margin: 0;
 	}
-	.super-group-menu>ul.js li.option-select {
-		display: none;
+	.super-group-bar .content .subnav > li > a {
+		font-size: .6rem;
 	}
-} */
+}

@@ -145,6 +145,12 @@ jQuery(document).ready(function(jq) {
 			$headerId.removeClass("header-id-scrolled");
 		}
 
+		if ($headerId.hasClass('header-id-scrolled') && $moreMenu.is(':visible')) {
+			$('.header-id > a > span').addClass('hide');
+		} else {
+			$('.header-id > a > span').removeClass('hide');
+		}
+
 		// Fix menu directly under QUBES navbar
 		if (windowTop > bannerHeight) {
 			$menuWrap.addClass("super-group-menu-scrolled");
