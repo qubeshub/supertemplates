@@ -166,7 +166,7 @@ jQuery(document).ready(function(jq) {
 		} else {
 			pushAndPullSidebar = ($sidebarWrap.outerHeight(true) > ((windowTop + $(window).height()) - ($menuWrap.offset().top + $menuWrap.height())));
 
-			if ((!pushAndPullSidebar) && ($sidebarWrap.css('position') !== 'fixed')) {
+			if (!pushAndPullSidebar && $moreMenu.is(':hidden')) {
 				$sidebarWrap.removeClass("sidebar-wrapper-fixed-bottom sidebar-wrapper-footer").addClass("sidebar-wrapper-fixed-top");
 			} else {
 				pushingUp = !scrollingDown && (($sidebarWrap.offset().top + 1) >
@@ -175,7 +175,7 @@ jQuery(document).ready(function(jq) {
 					(windowTop + $(this).height()))
 
 				if (pushingDown) {
-					if ((scrollingDown) && ($sidebarWrap.css('position') !== 'fixed')) {
+					if (scrollingDown && $moreMenu.is(':hidden')) {
 						$sidebarWrap.removeClass("sidebar-wrapper-fixed-top sidebar-wrapper-footer").addClass("sidebar-wrapper-fixed-bottom");
 					}
 				} else {
@@ -186,7 +186,7 @@ jQuery(document).ready(function(jq) {
 				}
 
 				if (pushingUp) {
-					if ((!scrollingDown && ($sidebarWrap.css('position') !== 'fixed'))) {
+					if (!scrollingDown && $moreMenu.is(':hidden')) {
 						$sidebarWrap.removeClass("sidebar-wrapper-fixed-bottom sidebar-wrapper-footer").addClass("sidebar-wrapper-fixed-top");
 					}
 				} else {
@@ -210,7 +210,7 @@ jQuery(document).ready(function(jq) {
 
 		// Sidebar responsiveness
 		// Media query triggered and window is mobile width
-		if ($sidebarWrap.css('position') == 'fixed') {
+		if ($moreMenu.is(':visible')) {
 
 			// Move remaining links to the more menu
 			$('.sidebar-nav > li:nth-child(5)').nextAll().prependTo('.more-links');
@@ -227,11 +227,11 @@ jQuery(document).ready(function(jq) {
 		if ($sidebarWrap.hasClass('sidebar-wrapper-fixed-top') && ($moreLinks.children().length > 0)) {
 			$moreLinks.children().appendTo($sidebarNav);
 		}
-		if ($moreLinks.hasClass('links-visible') && (($sidebarWrap.css('position') !== 'fixed') || $sidebarWrap.hasClass('sidebar-wrapper-fixed-top'))) {
-			$moreLinks.removeClass('links-visile');
+		if ($moreLinks.hasClass('links-visible') && $moreMenu.is(':hidden')) {
+			$moreLinks.removeClass('links-visible');
 			$sidebarNav.removeClass('more-menu-expanded');
+			$sidebarWrap.removeClass('fullscreen');
 			$('body, html').removeClass('no-scroll');
-			console.log('detected');
 		}
 
 	});
