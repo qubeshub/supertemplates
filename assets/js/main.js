@@ -160,7 +160,7 @@ jQuery(document).ready(function(jq) {
 
 		// Negative padding on $menuWrap is a headache!
 		// Fix sidebar directly under menu after announcements
-		if (windowTop < bannerHeight + $scontainer.height()) {
+		if (windowTop < bannerHeight + $scontainer.height() && $moreMenu.is(":hidden")) {
 			$sidebarWrap.css("top","");
 			$sidebarWrap.removeClass();
 		} else {
@@ -179,7 +179,7 @@ jQuery(document).ready(function(jq) {
 						$sidebarWrap.removeClass("sidebar-wrapper-fixed-top sidebar-wrapper-footer").addClass("sidebar-wrapper-fixed-bottom");
 					}
 				} else {
-					if ((!scrollingDown) && ($sidebarWrap.hasClass("sidebar-wrapper-fixed-bottom"))) {
+					if ((!scrollingDown) && ($sidebarWrap.hasClass("sidebar-wrapper-fixed-bottom")) && ($moreMenu.is(":hidden"))) {
 						$sidebarWrap.removeClass();
 						$sidebarWrap.css("top", 44 - $sidebarWrap.outerHeight(true) + $(this).height() - 85 - 25 + windowTop + parseFloat($contentWrap.css("padding-top")) - $contentWrap.offset().top + "px");
 					}
@@ -190,7 +190,7 @@ jQuery(document).ready(function(jq) {
 						$sidebarWrap.removeClass("sidebar-wrapper-fixed-bottom sidebar-wrapper-footer").addClass("sidebar-wrapper-fixed-top");
 					}
 				} else {
-					if ((scrollingDown) && ($sidebarWrap.hasClass("sidebar-wrapper-fixed-top"))) {
+					if ((scrollingDown) && ($sidebarWrap.hasClass("sidebar-wrapper-fixed-top")) && ($moreMenu.is(":hidden"))) {
 						$sidebarWrap.removeClass();
 						$sidebarWrap.css("top", 42 + windowTop + parseFloat($contentWrap.css("padding-top")) - $contentWrap.offset().top + "px");
 					}
@@ -198,8 +198,8 @@ jQuery(document).ready(function(jq) {
 			}
 
 			// Put sidebar at bottom when footer starts to encroach and scroll with page
-			if ((pushAndPullSidebar && (windowTop + $(this).height() > $footerWrap.offset().top + 41 - 13)) ||
-			   (!pushAndPullSidebar && ($sidebarWrap.offset().top + $sidebarWrap.height() + parseFloat($sidebarWrap.css("margin-bottom")) > $footerWrap.offset().top))) {
+			if (((pushAndPullSidebar && (windowTop + $(this).height() > $footerWrap.offset().top + 41 - 13)) ||
+			   (!pushAndPullSidebar && ($sidebarWrap.offset().top + $sidebarWrap.height() + parseFloat($sidebarWrap.css("margin-bottom")) > $footerWrap.offset().top))) && $moreMenu.is(':hidden')) {
 				$sidebarWrap.removeClass();
 				$sidebarWrap.addClass("sidebar-wrapper-footer");
 			}
@@ -210,8 +210,7 @@ jQuery(document).ready(function(jq) {
 	});
 
 	// Sidebar responsiveness
-	$(window).on('load resize', function() {
-
+	function mobileNav() {
 		// Media query triggered and window is mobile width
 		if ($moreMenu.is(':visible')) {
 
@@ -235,7 +234,27 @@ jQuery(document).ready(function(jq) {
 			$sidebarNav.removeClass('more-menu-expanded');
 			$sidebarWrap.removeClass('fullscreen');
 			$('body, html').removeClass('no-scroll');
+			console.log('hamburger is hidden');
 		}
+	}
+
+	// Window Listeners
+	var cachedWidth = $(window).width();
+
+	$(window).on('resize', function() {
+
+		var newWidth = $(window).width();
+
+        if(newWidth !== cachedWidth) {
+
+					mobileNav();
+          cachedWidth = newWidth;
+        }
+	});
+
+	$(window).on('load', function() {
+
+		mobileNav();
 	});
 
 	// Mobile menu button
