@@ -381,4 +381,49 @@ jQuery(document).ready(function(jq) {
     }
   });
 
+	// Change hover to tap for touchscreen for main navbar
+	//https://stackoverflow.com/questions/42066301/hover-menu//-is-not-working-on-touch-device-because-link-gets-trigg//ered
+	window.USER_IS_TOUCHING = false;
+	window.addEventListener('touchstart', function onFirstTouch() {
+    window.USER_IS_TOUCHING = true;
+	 	// we only need to know once that a human touched the screen, so we can stop listening now
+  	window.removeEventListener('touchstart', onFirstTouch, false);
+	}, false);
+
+  function is_touch_device() {
+    return 'ontouchstart' in window        // works on most browsers
+        || navigator.maxTouchPoints;       // works on IE10/11 and Surface
+  };
+  $('ul > li > a').click(function(e){
+      var target = $(e.target);
+      var parent = target.parent(); // the li
+      if(is_touch_device() || window.USER_IS_TOUCHING){
+          if(target.hasClass("hover-effect")){
+              //run default action of the link
+          }
+          else{
+              e.preventDefault();
+              //remove class active from all links
+              $('ul > li > a.hover-effect').removeClass('hover-effect');
+
+              //set class active to current link
+              target.addClass("hover-effect");
+              parent.addClass("hover-effect");
+          }
+      }
+  });
+  $('ul > li').click(function(e){
+    //remove class active from all links if li was clicked
+    if (e.target == this){
+      $(".hover-effect").removeClass('hover-effect');
+    }
+  });
+
+	// Close dropdown menu if tap on body
+	$('body').click(function(e) {
+    if($(e.target).closest('.super-group-menu').length === 0) {
+      $('ul > li').removeClass('hover-effect');
+    }
+  });
+
 });
